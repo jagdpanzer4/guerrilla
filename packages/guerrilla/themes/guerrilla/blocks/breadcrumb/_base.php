@@ -13,8 +13,6 @@ $crumbs = [];
 // Try to get the current page trail
 $currentPage = Page::getCurrentPage();
 if ($currentPage && !$currentPage->isError()) {
-    $parents = array_reverse($currentPage->getPagePaths() ? [] : []);
-    
     // Build from page hierarchy
     $page = $currentPage;
     $trail = [];
