@@ -233,7 +233,7 @@
         width: 100%;
         padding: 8px 0;
     }
-    .md3-autonav--open .md3-nav__list {
+    .md3-nav.md3-autonav--open .md3-nav__list {
         display: flex;
     }
     .md3-nav__dropdown {

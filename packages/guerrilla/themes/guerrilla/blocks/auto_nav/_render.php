@@ -16,7 +16,7 @@ $layout = $layout ?? 'dark-topbar';
                 <li class="md3-nav__item<?= $item->isCurrent ? ' md3-nav__item--current' : '' ?><?= $item->isSelected ? ' md3-nav__item--selected' : '' ?>">
                     <a href="<?= htmlspecialchars($item->url) ?>"
                        class="md3-nav__link md3-glow-text"
-                       <?= $item->target ? 'target="' . htmlspecialchars($item->target) . '"' : '' ?>>
+                       <?= $item->target ? 'target="' . htmlspecialchars($item->target) . '"' . ($item->target === '_blank' ? ' rel="noopener"' : '') : '' ?>>
                         <?= htmlspecialchars($item->name) ?>
                     </a>
                     <?php if ($item->hasSubmenu): ?>
@@ -26,7 +26,7 @@ $layout = $layout ?? 'dark-topbar';
                             <li class="md3-nav__sub-item<?= $sub->isCurrent ? ' md3-nav__item--current' : '' ?>">
                                 <a href="<?= htmlspecialchars($sub->url) ?>"
                                    class="md3-nav__sub-link md3-glow-text"
-                                   <?= $sub->target ? 'target="' . htmlspecialchars($sub->target) . '"' : '' ?>>
+                                   <?= $sub->target ? 'target="' . htmlspecialchars($sub->target) . '"' . ($sub->target === '_blank' ? ' rel="noopener"' : '') : '' ?>>
                                     <?= htmlspecialchars($sub->name) ?>
                                 </a>
                             </li>
@@ -54,7 +54,7 @@ $layout = $layout ?? 'dark-topbar';
                     <li class="md3-nav__item<?= $item->isCurrent ? ' md3-nav__item--current' : '' ?><?= $item->hasSubmenu ? ' md3-nav__item--has-sub' : '' ?>">
                         <a href="<?= htmlspecialchars($item->url) ?>"
                            class="md3-nav__link md3-glow-text"
-                           <?= $item->target ? 'target="' . htmlspecialchars($item->target) . '"' : '' ?>>
+                           <?= $item->target ? 'target="' . htmlspecialchars($item->target) . '"' . ($item->target === '_blank' ? ' rel="noopener"' : '') : '' ?>>
                             <?= htmlspecialchars($item->name) ?>
                             <?php if ($item->hasSubmenu): ?><span class="md3-nav__sub-arrow" aria-hidden="true">&#9660;</span><?php endif; ?>
                         </a>
@@ -65,7 +65,7 @@ $layout = $layout ?? 'dark-topbar';
                                 <li class="md3-nav__dropdown-item<?= $sub->isCurrent ? ' md3-nav__item--current' : '' ?>">
                                     <a href="<?= htmlspecialchars($sub->url) ?>"
                                        class="md3-nav__dropdown-link md3-glow-text"
-                                       <?= $sub->target ? 'target="' . htmlspecialchars($sub->target) . '"' : '' ?>>
+                                       <?= $sub->target ? 'target="' . htmlspecialchars($sub->target) . '"' . ($sub->target === '_blank' ? ' rel="noopener"' : '') : '' ?>>
                                         <?= htmlspecialchars($sub->name) ?>
                                     </a>
                                 </li>
