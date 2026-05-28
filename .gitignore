@@ -1,0 +1,38 @@
+# Dependencies
+/vendor/
+/concrete/
+/node_modules/
+
+# Environment
+.env
+
+# Composer lock (optional – keep if you want reproducible builds)
+# composer.lock
+
+# Concrete CMS runtime
+/files/cache/
+/files/tmp/
+/files/trash/
+/files/incoming/
+/updates/
+/application/files/
+
+# Database config (generated during install)
+/application/config/database.php
+/application/config/site.php
+/application/config/app.php
+
+# Generated assets
+/packages/guerrilla/themes/guerrilla/css/compiled/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+/logs/

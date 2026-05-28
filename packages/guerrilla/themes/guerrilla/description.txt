@@ -1,0 +1,1 @@
+Guerrilla – nowoczesny motyw dla Concrete CMS 9.5 oparty na Bootstrap 5.

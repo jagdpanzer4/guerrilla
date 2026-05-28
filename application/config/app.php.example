@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * application/config/app.php
+ *
+ * This file is auto-generated during Concrete CMS installation.
+ * Do NOT commit the generated version – only this example.
+ * Copy from app.php.example or let the installer create it.
+ */
+
+return [
+    // Application debug mode – set to false in production
+    'debug' => false,
+
+    // Default locale
+    'locale' => 'pl_PL',
+
+    // Timezone
+    'timezone' => 'Europe/Warsaw',
+
+    // Canonical URL (set during install or via .env)
+    'url' => env('APP_URL', 'http://localhost'),
+
+    // Session lifetime in seconds
+    'session_lifetime' => 3600,
+];
