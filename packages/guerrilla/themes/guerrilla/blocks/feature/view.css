@@ -1,0 +1,105 @@
+/* ---- Feature Block Base ---- */
+.md3-block--feature {
+    padding: 28px 24px;
+    border-radius: 10px;
+    transition: box-shadow 0.2s ease;
+}
+
+.md3-feature__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.md3-feature__inner--row {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+/* ---- Icon ---- */
+.md3-feature__icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: box-shadow 0.2s ease;
+}
+
+.md3-feature__icon {
+    font-size: 24px;
+}
+
+/* Icon wrap colors per variant */
+.md3-block--light .md3-feature__icon-wrap {
+    background-color: var(--g-ol-200);
+    color: var(--g-ol-800);
+}
+.md3-block--dark .md3-feature__icon-wrap {
+    background-color: var(--g-ol-700);
+    color: var(--g-cr-100);
+}
+.md3-block--tonal .md3-feature__icon-wrap {
+    background-color: var(--g-ol-300);
+    color: var(--g-ol-900);
+}
+.md3-block--accent .md3-feature__icon-wrap {
+    background-color: rgba(255,255,255,0.2);
+    color: #ffffff;
+}
+
+/* Icon glow on block hover */
+.md3-block--feature:hover .md3-feature__icon-wrap {
+    box-shadow: 0 0 14px 4px var(--g-glow-primary);
+}
+.md3-block--accent.md3-block--feature:hover .md3-feature__icon-wrap {
+    box-shadow: 0 0 14px 4px var(--g-glow-cta);
+}
+
+/* ---- Content ---- */
+.md3-feature__title {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin: 0 0 8px;
+    color: inherit;
+}
+
+.md3-feature__body {
+    font-size: 15px;
+    line-height: 1.65;
+    margin: 0 0 16px;
+}
+
+/* ---- Card layout ---- */
+.md3-feature--card {
+    border: 1px solid transparent;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.md3-block--light.md3-feature--card {
+    border-color: var(--g-ol-300);
+}
+.md3-block--dark.md3-feature--card {
+    border-color: var(--g-ol-700);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+.md3-block--tonal.md3-feature--card {
+    border-color: var(--g-ol-400, var(--g-ol-500));
+}
+.md3-feature--card:hover {
+    box-shadow: 0 0 18px 4px var(--g-glow-primary);
+}
+.md3-block--accent.md3-feature--card:hover {
+    box-shadow: 0 0 18px 4px var(--g-glow-cta);
+}
+
+/* ---- Dark variant title/body colour override ---- */
+.md3-block--dark .md3-feature__title {
+    color: var(--g-cr-100);
+}
+.md3-block--dark .md3-feature__body {
+    color: var(--g-cr-200);
+}
