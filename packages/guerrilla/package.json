@@ -8,10 +8,9 @@
     "build": "vite build",
     "package:build": "npm run build && bash ../../scripts/package-guerrilla.sh"
   },
-  "dependencies": {
-    "@material/web": "^2.2.0"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@material/web": "^2.2.0",
     "vite": "^6.3.5"
   }
 }

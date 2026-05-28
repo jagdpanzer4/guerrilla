@@ -20,6 +20,9 @@ class PageTheme extends Theme
         // Register Bootstrap 5
         $this->requireAsset('javascript', 'bootstrap');
         $this->requireAsset('css', 'bootstrap');
+
+        // Load Material Web Components (MD3) bundle
+        $this->requireAsset('javascript', 'guerrilla/material-web');
     }
 
     /**
