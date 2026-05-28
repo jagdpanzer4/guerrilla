@@ -42,3 +42,6 @@ Thumbs.db
 
 # Deployment zip artefacts
 guerrilla-v*.zip
+
+# Visual brainstorming sessions
+.superpowers/
