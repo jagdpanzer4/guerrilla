@@ -71,3 +71,159 @@ body {
         padding-top: 1rem;
     }
 }
+
+/* ============================================================
+   MD3 Block Templates — Design System
+   ============================================================ */
+
+/* --- Palette Variables --- */
+:root {
+    /* Olive Green — Primary / Secondary */
+    --g-ol-900: #2d3a1a;
+    --g-ol-800: #364820;
+    --g-ol-700: #4a5e28;
+    --g-ol-600: #526830;
+    --g-ol-500: #6b883c;
+    --g-ol-300: #adc47a;
+    --g-ol-200: #cdd9a8;
+
+    /* Cream — Surface / Background */
+    --g-cr-100: #f5f0e8;
+    --g-cr-200: #ede6d6;
+    --g-cr-300: #e0d5bf;
+
+    /* Orange — CTA / Accent */
+    --g-or-600: #c45a00;
+    --g-or-500: #e06a00;
+    --g-or-400: #f27c1a;
+    --g-or-300: #f59a4a;
+
+    /* Glow — controllable per deployment */
+    --g-glow-primary:    rgba(107, 136, 60, 0.40);
+    --g-glow-cta:        rgba(224, 106, 0,  0.55);
+    --g-glow-intensity:  1;
+}
+
+/* --- Shared Block Wrapper --- */
+.md3-block {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+/* Color Variant — Light (default) */
+.md3-block--light {
+    background-color: var(--g-cr-100);
+    color: var(--g-ol-900);
+}
+
+/* Color Variant — Dark */
+.md3-block--dark {
+    background-color: var(--g-ol-900);
+    color: var(--g-cr-100);
+}
+.md3-block--dark .md3-block__subtitle,
+.md3-block--dark .md3-block__meta {
+    color: var(--g-ol-300);
+}
+
+/* Color Variant — Tonal */
+.md3-block--tonal {
+    background-color: var(--g-ol-200);
+    color: var(--g-ol-900);
+}
+.md3-block--tonal .md3-block__subtitle {
+    color: var(--g-ol-700);
+}
+
+/* Color Variant — Accent */
+.md3-block--accent {
+    background-color: var(--g-or-600);
+    color: #ffffff;
+}
+
+/* --- Shared Glow Utilities --- */
+.md3-glow-cta {
+    transition: box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.md3-glow-cta:hover {
+    box-shadow: 0 0 14px 3px var(--g-glow-cta);
+}
+
+.md3-glow-primary {
+    transition: box-shadow 0.2s ease;
+}
+.md3-glow-primary:hover {
+    box-shadow: 0 0 12px 2px var(--g-glow-primary);
+}
+
+.md3-glow-text {
+    transition: text-shadow 0.2s ease, color 0.2s ease;
+}
+.md3-glow-text:hover {
+    text-shadow: 0 0 10px var(--g-glow-cta);
+}
+
+/* --- Shared MD3 Button Styles --- */
+.md3-btn {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.md3-btn--filled {
+    background-color: var(--g-or-500);
+    color: #ffffff;
+}
+.md3-btn--filled:hover {
+    background-color: var(--g-or-600);
+    box-shadow: 0 0 14px 3px var(--g-glow-cta);
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.md3-btn--outlined {
+    background-color: transparent;
+    color: var(--g-ol-700);
+    border: 2px solid var(--g-ol-500);
+}
+.md3-btn--outlined:hover {
+    box-shadow: 0 0 12px 2px var(--g-glow-primary);
+}
+
+.md3-btn--tonal {
+    background-color: var(--g-ol-200);
+    color: var(--g-ol-900);
+}
+.md3-btn--tonal:hover {
+    box-shadow: 0 0 12px 2px var(--g-glow-primary);
+}
+
+/* Dark variant button overrides */
+.md3-block--dark .md3-btn--outlined {
+    color: var(--g-ol-300);
+    border-color: var(--g-ol-500);
+}
+
+/* --- Section Label (military uppercase) --- */
+.md3-section-label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--g-ol-500);
+    margin-bottom: 8px;
+}
+.md3-block--dark .md3-section-label {
+    color: var(--g-ol-300);
+}
+.md3-block--accent .md3-section-label {
+    color: rgba(255, 255, 255, 0.75);
+}
