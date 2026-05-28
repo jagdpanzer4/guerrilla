@@ -13,6 +13,31 @@
     --guerrilla-accent:    #e94560;
     --guerrilla-light:     #f5f5f5;
     --guerrilla-font:      'Segoe UI', system-ui, sans-serif;
+
+    /* Olive Green — Primary / Secondary */
+    --g-ol-900: #2d3a1a;
+    --g-ol-800: #364820;
+    --g-ol-700: #4a5e28;
+    --g-ol-600: #526830;
+    --g-ol-500: #6b883c;
+    --g-ol-300: #adc47a;
+    --g-ol-200: #cdd9a8;
+
+    /* Cream — Surface / Background */
+    --g-cr-100: #f5f0e8;
+    --g-cr-200: #ede6d6;
+    --g-cr-300: #e0d5bf;
+
+    /* Orange — CTA / Accent */
+    --g-or-600: #c45a00;
+    --g-or-500: #e06a00;
+    --g-or-400: #f27c1a;
+    --g-or-300: #f59a4a;
+
+    /* Glow — controllable per deployment */
+    --g-glow-primary:    rgba(107, 136, 60, 0.40);
+    --g-glow-cta:        rgba(224, 106, 0,  0.55);
+    --g-glow-intensity:  1;
 }
 
 /* ---- Base ---- */
@@ -76,33 +101,6 @@ body {
    MD3 Block Templates — Design System
    ============================================================ */
 
-/* --- Palette Variables --- */
-:root {
-    /* Olive Green — Primary / Secondary */
-    --g-ol-900: #2d3a1a;
-    --g-ol-800: #364820;
-    --g-ol-700: #4a5e28;
-    --g-ol-600: #526830;
-    --g-ol-500: #6b883c;
-    --g-ol-300: #adc47a;
-    --g-ol-200: #cdd9a8;
-
-    /* Cream — Surface / Background */
-    --g-cr-100: #f5f0e8;
-    --g-cr-200: #ede6d6;
-    --g-cr-300: #e0d5bf;
-
-    /* Orange — CTA / Accent */
-    --g-or-600: #c45a00;
-    --g-or-500: #e06a00;
-    --g-or-400: #f27c1a;
-    --g-or-300: #f59a4a;
-
-    /* Glow — controllable per deployment */
-    --g-glow-primary:    rgba(107, 136, 60, 0.40);
-    --g-glow-cta:        rgba(224, 106, 0,  0.55);
-    --g-glow-intensity:  1;
-}
 
 /* --- Shared Block Wrapper --- */
 .md3-block {
