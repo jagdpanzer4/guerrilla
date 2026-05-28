@@ -1,0 +1,69 @@
+.md3-block--image {
+    padding: 16px;
+    border-radius: 8px;
+}
+
+.md3-block--image .md3-block__figure {
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+.md3-block--image .md3-block__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.md3-block--image .md3-block__img-link:hover .md3-block__img {
+    transform: scale(1.02);
+}
+
+.md3-block--image .md3-block__img-link {
+    display: block;
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+/* Caption styles per variant */
+.md3-block--image .md3-block__caption {
+    display: block;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    padding: 8px 4px 4px;
+    border-top: 1px solid transparent;
+    margin-top: 8px;
+}
+
+.md3-block--light.md3-block--image .md3-block__caption {
+    color: var(--g-ol-700);
+    border-color: var(--g-ol-300);
+}
+
+.md3-block--dark.md3-block--image .md3-block__caption {
+    color: var(--g-ol-300);
+    border-color: var(--g-ol-600);
+}
+
+.md3-block--tonal.md3-block--image .md3-block__caption {
+    color: var(--g-ol-700);
+    border-color: var(--g-ol-500);
+}
+
+.md3-block--accent.md3-block--image .md3-block__caption {
+    color: rgba(255,255,255,0.85);
+    border-color: rgba(255,255,255,0.3);
+}
+
+/* Glow on image link hover — reuse shared utility but also add border glow */
+.md3-block--light.md3-block--image .md3-block__img-link:hover,
+.md3-block--tonal.md3-block--image .md3-block__img-link:hover {
+    box-shadow: 0 0 18px 4px var(--g-glow-primary);
+}
+
+.md3-block--dark.md3-block--image .md3-block__img-link:hover,
+.md3-block--accent.md3-block--image .md3-block__img-link:hover {
+    box-shadow: 0 0 18px 4px var(--g-glow-cta);
+}
