@@ -1,0 +1,16 @@
+{
+  "name": "guerrilla",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build",
+    "package:build": "npm run build && bash ../../scripts/package-guerrilla.sh"
+  },
+  "dependencies": {
+    "@material/web": "^2.2.0"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}
