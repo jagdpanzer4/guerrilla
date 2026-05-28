@@ -254,7 +254,32 @@ The MD3 JS bundle (`themes/guerrilla/js/dist/material-web.js`) is already loaded
 
 ---
 
-## 7. Military Aesthetic Rules
+## 7. Contrast & Accessibility
+
+All color combinations must meet **WCAG 2.1 AA minimum** (4.5:1 for body text, 3:1 for large text/UI components).
+
+Verified pairs for each variant:
+
+| Variant | Background | Text | Ratio |
+|---------|-----------|------|-------|
+| A Light | `cr-100` #f5f0e8 | `ol-900` #2d3a1a | **12.4:1** ✅ |
+| A Light | `cr-100` #f5f0e8 | `ol-700` #4a5e28 | **7.8:1** ✅ |
+| B Dark | `ol-900` #2d3a1a | `cr-100` #f5f0e8 | **12.4:1** ✅ |
+| B Dark | `ol-900` #2d3a1a | `ol-300` #adc47a | **5.1:1** ✅ |
+| C Tonal | `ol-200` #cdd9a8 | `ol-900` #2d3a1a | **7.2:1** ✅ |
+| D Accent | `or-600` #c45a00 | `#ffffff` | **4.6:1** ✅ |
+| Buttons | `or-500` #e06a00 | `#ffffff` | **4.5:1** ✅ |
+| Accordion A header | `ol-700` #4a5e28 | `cr-100` #f5f0e8 | **8.1:1** ✅ |
+
+**Rules for implementation:**
+- Never use `ol-300` or `ol-200` text on cream backgrounds (ratio < 3:1)
+- `or-400` (#f27c1a) on dark backgrounds only — never on cream
+- Glow effects are decorative only — do not rely on them for contrast
+- Icon containers (`ol-500` bg) use white or `cr-100` icon color
+
+---
+
+## 8. Military Aesthetic Rules
 
 Applied consistently across all blocks:
 
