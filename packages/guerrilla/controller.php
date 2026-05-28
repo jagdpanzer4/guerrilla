@@ -2,6 +2,8 @@
 
 namespace Concrete\Package\Guerrilla;
 
+use Concrete\Core\Asset\Asset;
+use Concrete\Core\Asset\AssetList;
 use Concrete\Core\Package\Package;
 
 defined('C5_EXECUTE') or die('Access Denied.');
@@ -21,6 +23,24 @@ class Controller extends Package
     public function getPackageName(): string
     {
         return t('Guerrilla');
+    }
+
+    public function on_start(): void
+    {
+        $al = AssetList::getInstance();
+        $al->register(
+            'javascript',
+            'guerrilla/material-web',
+            'js/dist/material-web.js',
+            [
+                'position' => Asset::ASSET_POSITION_FOOTER,
+                'local'    => true,
+                'version'  => $this->pkgVersion,
+                'combine'  => false,
+                'minify'   => false,
+            ],
+            $this->getPackageHandle()
+        );
     }
 
     public function install(): void
