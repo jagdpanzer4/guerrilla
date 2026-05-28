@@ -98,6 +98,52 @@ Pliki motywu znajdują się w `packages/guerrilla/themes/guerrilla/`.
 
 ---
 
+## Frontend – Material Web Components
+
+Bloki pakietu Guerrilla korzystają z biblioteki [Material Web](https://material-web.dev/) (Google MD3) kompilowanej przy użyciu [Vite](https://vitejs.dev/).
+
+### Wymagania
+
+| Narzędzie | Wersja |
+|---|---|
+| Node.js | ≥ 18 |
+| npm | ≥ 9 |
+
+### Pierwsze uruchomienie
+
+```bash
+cd packages/guerrilla
+npm install
+```
+
+### Polecenia
+
+| Polecenie | Opis |
+|---|---|
+| `npm run dev` | Tryb watch – przebudowuje przy każdej zmianie w `src/` |
+| `npm run build` | Produkcyjna kompilacja do `themes/guerrilla/js/dist/` |
+| `npm run package:build` | Kompiluje assets i tworzy `guerrilla-v{wersja}.zip` |
+
+### Dodawanie nowego komponentu MD3
+
+1. Znajdź komponent na [material-web.dev/components](https://material-web.dev/components/)
+2. Dodaj import do `packages/guerrilla/src/material-web.js`
+3. Uruchom `npm run build`
+4. Użyj tagu HTML w `view.php` bloku, np. `<md-filled-button>`
+
+### Wdrożenie na hosting współdzielony
+
+```bash
+cd packages/guerrilla
+npm run package:build
+# Powstaje: guerrilla-v{wersja}.zip w katalogu głównym projektu
+```
+
+Prześlij zip na serwer, rozpakuj do `packages/` i zainstaluj pakiet przez panel CMS.  
+**Node.js nie jest wymagany na serwerze.**
+
+---
+
 ## Licencja
 
 MIT – szczegóły w pliku [LICENSE](LICENSE).
