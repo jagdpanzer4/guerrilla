@@ -1,14 +1,32 @@
-# MUI v6 Integration Design
+# Material Web Components (MD3) Integration Design
 
 **Date:** 2026-05-28  
 **Project:** Guerrilla — Concrete CMS 9.5 package  
-**Status:** Approved
+**Status:** Approved  
+**Supersedes:** Original MUI v6/React design (abandoned — ConcreteCMS 9.5 uses Vue 2, not React; React blocks render client-side only which is unsuitable for content blocks)
 
 ---
 
 ## Overview
 
-Integrate Material UI v6 (MUI) into the `guerrilla` Concrete CMS package as the component library for React-based custom blocks. The build toolchain runs on the developer's machine only; shared hosting receives pre-built assets and a deployable zip package.
+Integrate Google's official Material Design 3 library — **Material Web** (`@material/web`) — into the `guerrilla` Concrete CMS package as the component foundation for custom blocks.
+
+Material Web ships as **Web Components** (custom elements). PHP renders the component HTML tags server-side; the JS bundle registers the custom elements and handles interactivity. Content is fully visible before JavaScript loads — no client-side rendering problem.
+
+The build toolchain (Vite) runs on the developer's machine only. Shared hosting receives pre-built assets and a deployable zip.
+
+---
+
+## Why Material Web over MUI/React
+
+| Concern | MUI v6 + React | Material Web Components |
+|---|---|---|
+| ConcreteCMS ships React? | ❌ No (uses Vue 2) | ✅ Not needed |
+| Content rendered server-side? | ❌ Client-side only | ✅ PHP renders HTML tags |
+| SEO-friendly? | ⚠️ Depends on JS | ✅ Always |
+| Framework conflicts? | ⚠️ Vue 2 globals in edit mode | ✅ None (Web Components) |
+| Bootstrap 5 CSS conflict? | ⚠️ Requires careful scoping | ✅ Shadow DOM isolates styles |
+| Shared hosting compatible? | ✅ Pre-built dist | ✅ Pre-built dist |
 
 ---
 
@@ -16,40 +34,34 @@ Integrate Material UI v6 (MUI) into the `guerrilla` Concrete CMS package as the 
 
 ```
 packages/guerrilla/
-├── package.json               ← Vite + MUI + Emotion dependencies
-├── vite.config.js             ← Multi-entry build, React externalized
+├── package.json               ← Vite + @material/web
+├── vite.config.js             ← Single entry, ES module output
 ├── src/
-│   └── blocks/                ← One React entry point per block
-│       └── [block-handle]/
-│           └── index.jsx
+│   └── material-web.js        ← Imports all MD3 components used in blocks
 └── themes/guerrilla/
     └── js/dist/               ← Vite build output (committed to git)
-        ├── vendor.js           ← MUI + Emotion shared chunk
-        └── blocks/
-            └── [block-handle].js
+        └── material-web.js    ← Tree-shaken bundle of used components
 ```
 
 **Key decisions:**
 
-- React and ReactDOM are **externalized** — not bundled. Concrete CMS provides them at runtime via its own asset pipeline (`window.React`, `window.ReactDOM`).
-- MUI (`@mui/material`) and Emotion (`@emotion/react`, `@emotion/styled`) are bundled into a single `vendor.js`, loaded once and shared across all blocks.
-- `dist/` is **committed to git** so shared hosting deployments require no Node.js or npm.
-- `node_modules/` and `src/` are excluded from deployment packages.
+- **Single bundle** — Material Web registers components via `customElements.define()` globally. Splitting across files would cause "already defined" errors if two blocks used the same component. One bundle, loaded once, covers all blocks.
+- **Tree-shaking** — only the components explicitly imported in `src/material-web.js` are included. Unused MD3 components are stripped at build time.
+- **Server-side rendering** — PHP writes `<md-filled-button>`, `<md-card>`, etc. directly in `view.php`. Content is in the HTML; JS only enhances it.
+- **Style isolation** — Material Web uses Shadow DOM. Its internal styles do not conflict with Bootstrap 5 or ConcreteCMS chrome.
+- **`dist/` committed to git** — shared hosting deployments require no Node.js or npm.
 
 ---
 
 ## Dependencies
 
-**Runtime (bundled into `vendor.js`):**
-- `@mui/material` ^6
-- `@emotion/react`
-- `@emotion/styled`
+**Runtime (bundled into `material-web.js`):**
+- `@material/web` ^2 (Google's official MD3 web components)
 
 **Dev only:**
 - `vite`
-- `@vitejs/plugin-react`
 
-React and ReactDOM are provided by Concrete CMS — no npm dependency needed.
+No React, no Vue, no Emotion — no framework dependency at all.
 
 ---
 
@@ -57,28 +69,38 @@ React and ReactDOM are provided by Concrete CMS — no npm dependency needed.
 
 `packages/guerrilla/vite.config.js`:
 
-- **Entry points:** auto-discovered from `src/blocks/*/index.jsx`
-- **Externals:** `react`, `react-dom`
-- **Globals:** `{ react: 'React', 'react-dom': 'ReactDOM' }`
-- **manualChunks:** MUI + Emotion forced into `vendor.js`
+- **Entry point:** `src/material-web.js` (single file)
 - **Output directory:** `themes/guerrilla/js/dist/`
-- **Format:** `iife` per block (self-executing, no module loader required)
+- **Format:** `es` (ES module — modern browsers; or `iife` if IE11/legacy support needed)
+- **Minify:** `true` for production
+- **No externals** — everything bundled; no runtime dependency on ConcreteCMS internals
 
 ---
 
 ## Asset Registration
 
-### In `PageTheme::registerAssets()`
+Registration happens in the package controller's `on_start()` — this is the correct ConcreteCMS hook for registering assets into `AssetList` before any page rendering occurs.
 
-The shared vendor chunk is registered once for the whole theme:
+### In `packages/guerrilla/controller.php` → `on_start()`
 
 ```php
-$al->register(
-    'javascript', 'guerrilla/vendor',
-    'js/dist/vendor.js',
-    ['version' => '1.0', 'position' => Asset::ASSET_POSITION_FOOTER],
-    $pkg
-);
+public function on_start(): void
+{
+    $al = \Concrete\Core\Asset\AssetList::getInstance();
+    $al->register(
+        'javascript',
+        'guerrilla/material-web',
+        'js/dist/material-web.js',
+        [
+            'position' => \Concrete\Core\Asset\Asset::ASSET_POSITION_FOOTER,
+            'local'    => true,
+            'version'  => $this->pkgVersion,
+            'combine'  => false,
+            'minify'   => false,
+        ],
+        $this->getPackageHandle()
+    );
+}
 ```
 
 ### In each block's `controller.php`
@@ -86,41 +108,62 @@ $al->register(
 ```php
 public function registerViewAssets($outputContent = ''): void
 {
-    $this->requireAsset('javascript', 'guerrilla/vendor');
-    $this->requireAsset('javascript', 'guerrilla/block/[handle]');
+    $this->requireAsset('javascript', 'guerrilla/material-web');
 }
 ```
 
+The asset loads once per page even if multiple blocks require it — ConcreteCMS deduplicates asset requirements.
+
 ---
 
-## Block Mounting Pattern
+## Block Authoring Pattern
 
-### `view.php` — PHP side
-
-Outputs a mount target and passes CMS data as JSON:
+### `view.php` — PHP renders full content using MD3 tags
 
 ```php
-<div
-    id="guerrilla-[handle]-<?= $bID ?>"
-    data-props='<?= htmlspecialchars(json_encode($props), ENT_QUOTES) ?>'
-></div>
+<?php /** @var string $title */ /** @var string $body */ ?>
+
+<md-card>
+    <div slot="headline"><?= h($title) ?></div>
+    <div slot="subhead"><?= h($subtitle) ?></div>
+    <div slot="supporting-text"><?= $body ?></div>
+    <div slot="actions">
+        <md-filled-button><?= t('Read more') ?></md-filled-button>
+    </div>
+</md-card>
 ```
 
-### `src/blocks/[handle]/index.jsx` — React side
+Content is fully present in the HTML. The `material-web.js` bundle registers the custom elements, which then upgrade the existing DOM nodes — no content is created by JavaScript.
 
-Finds all mount targets on the page and renders:
+### `src/material-web.js` — import components as you add blocks
 
-```jsx
-import { createRoot } from 'react-dom/client';
-import MyBlock from './MyBlock';
-
-document.querySelectorAll('[id^="guerrilla-[handle]-"]').forEach(el => {
-    const props = JSON.parse(el.dataset.props);
-    createRoot(el).render(<MyBlock {...props} />);
-});
+```js
+// Add an import here each time a new MD3 component is used in any block
+import '@material/web/card/filled-card.js';
+import '@material/web/button/filled-button.js';
+import '@material/web/button/outlined-button.js';
+import '@material/web/divider/divider.js';
+// ... add more as needed
 ```
 
-This pattern supports multiple instances of the same block on one page.
+Vite tree-shakes this — only imported components are in the bundle.
+
+---
+
+## Theming
+
+Material Web uses **CSS custom properties** (tokens) for theming. Define your brand colours once in the theme's `main.css`:
+
+```css
+:root {
+    --md-sys-color-primary: #6750a4;
+    --md-sys-color-on-primary: #ffffff;
+    --md-sys-color-surface: #fffbfe;
+    /* ... full token set generated by Material Theme Builder */
+}
+```
+
+Tokens are generated for free at [material-foundation.github.io/material-theme-builder](https://material-foundation.github.io/material-theme-builder/). Export as CSS and paste into `main.css`.
 
 ---
 
@@ -155,9 +198,8 @@ guerrilla-v1.0.0.zip
     │       └── ...
     └── themes/
         └── guerrilla/
-            ├── js/dist/vendor.js
-            ├── js/dist/blocks/[block-handle].js
-            └── ...
+            ├── js/dist/material-web.js
+            └── css/main.css
 ```
 
 ### Deployment to shared hosting
@@ -173,9 +215,9 @@ No Node.js, npm, or build tools required on the server.
 
 ## Git Strategy
 
-- `dist/` — **committed** (pre-built assets for hostings without Node)
+- `themes/guerrilla/js/dist/` — **committed** (pre-built assets for shared hosting)
 - `node_modules/` — gitignored
-- `src/` — committed (source of truth for block JS)
+- `src/` — committed (source of truth for the component bundle)
 - `guerrilla-v*.zip` — gitignored (build artefact)
 
 ---
@@ -200,16 +242,26 @@ npm run package:build
 
 ---
 
-## Error Handling
+## Adding a New Block (Checklist)
 
-- If React is not available on `window.React` at block mount time, the block logs a console error and renders nothing (no white-screen crash).
-- MUI `ThemeProvider` wraps each block root to allow per-project theming without global CSS conflicts.
-- The `data-props` attribute is escaped with `htmlspecialchars` to prevent XSS from CMS content.
+1. Create `packages/guerrilla/blocks/[handle]/` with `controller.php` and `view.php`
+2. In `view.php`, use MD3 web component tags for the block's HTML
+3. In `src/material-web.js`, add `import` statements for any new components used
+4. Run `npm run build` to update `dist/material-web.js`
+5. In the block's `controller.php`, add `registerViewAssets()` requiring `guerrilla/material-web`
+
+---
+
+## Error Handling & Progressive Enhancement
+
+- If JavaScript fails to load, the raw custom element tags (`<md-card>`, `<md-filled-button>`) are still in the DOM. Browsers render unknown elements as inline elements — add a minimal CSS fallback in `main.css` for graceful degradation.
+- No white-screen risk: content is always server-rendered.
+- ConcreteCMS edit mode injects drag handles around the block's outer element. Block templates should use an inner wrapper `<div>` as the direct parent of MD3 components to avoid interference.
 
 ---
 
 ## Testing
 
-- Unit tests for React components use Vitest + `@testing-library/react`
+- Visual smoke test: install package on a local Concrete CMS 9.5 instance, verify components render correctly and upgrade in the browser (check `customElements.get('md-filled-button')` is defined)
 - PHP block controller tests use the existing PHPUnit setup
-- Visual smoke test: install package on a local Concrete CMS 9.5 instance and verify each block renders without JS console errors
+- No JS unit tests required for web components used as markup (no custom JS logic to test)
