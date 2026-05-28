@@ -1,0 +1,320 @@
+/* ---- Accordion Base ---- */
+.md3-block--accordion {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.md3-accordion__item {
+    border-bottom: 1px solid transparent;
+}
+.md3-accordion__item:last-child {
+    border-bottom: none;
+}
+
+.md3-accordion__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-align: left;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    background: transparent;
+}
+
+.md3-accordion__chevron {
+    font-size: 11px;
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+    margin-left: 12px;
+}
+
+.md3-accordion__item--open .md3-accordion__chevron {
+    transform: rotate(-180deg);
+}
+
+.md3-accordion__panel {
+    overflow: hidden;
+}
+.md3-accordion__panel[hidden] {
+    display: none;
+}
+
+.md3-accordion__body {
+    padding: 12px 20px 20px;
+    font-size: 15px;
+    line-height: 1.65;
+}
+
+/* ===============================================
+   STANDARD STYLE
+   =============================================== */
+
+/* Standard — Light */
+.md3-accordion--standard.md3-block--light .md3-accordion__trigger {
+    background-color: var(--g-ol-700);
+    color: var(--g-cr-100);
+}
+.md3-accordion--standard.md3-block--light .md3-accordion__trigger:hover {
+    background-color: var(--g-ol-600);
+    box-shadow: 0 0 10px 2px var(--g-glow-primary);
+}
+.md3-accordion--standard.md3-block--light .md3-accordion__item--open .md3-accordion__trigger {
+    background-color: var(--g-ol-900);
+    color: var(--g-cr-100);
+}
+.md3-accordion--standard.md3-block--light .md3-accordion__item--open .md3-accordion__chevron {
+    color: var(--g-or-400);
+}
+.md3-accordion--standard.md3-block--light .md3-accordion__body {
+    background-color: var(--g-cr-100);
+    color: var(--g-ol-900);
+}
+.md3-accordion--standard.md3-block--light .md3-accordion__item {
+    border-color: var(--g-ol-500);
+}
+
+/* Standard — Dark */
+.md3-accordion--standard.md3-block--dark .md3-accordion__trigger {
+    background-color: var(--g-ol-800);
+    color: var(--g-cr-100);
+}
+.md3-accordion--standard.md3-block--dark .md3-accordion__trigger:hover {
+    background-color: var(--g-ol-700);
+    box-shadow: 0 0 10px 2px var(--g-glow-primary);
+}
+.md3-accordion--standard.md3-block--dark .md3-accordion__item--open .md3-accordion__trigger {
+    background-color: var(--g-ol-900);
+    color: var(--g-cr-100);
+}
+.md3-accordion--standard.md3-block--dark .md3-accordion__item--open .md3-accordion__chevron {
+    color: var(--g-or-400);
+}
+.md3-accordion--standard.md3-block--dark .md3-accordion__body {
+    background-color: var(--g-ol-900);
+    color: var(--g-cr-200);
+}
+.md3-accordion--standard.md3-block--dark .md3-accordion__item {
+    border-color: var(--g-ol-600);
+}
+
+/* Standard — Tonal */
+.md3-accordion--standard.md3-block--tonal .md3-accordion__trigger {
+    background-color: var(--g-ol-600);
+    color: var(--g-cr-100);
+}
+.md3-accordion--standard.md3-block--tonal .md3-accordion__trigger:hover {
+    background-color: var(--g-ol-500);
+    box-shadow: 0 0 10px 2px var(--g-glow-primary);
+}
+.md3-accordion--standard.md3-block--tonal .md3-accordion__item--open .md3-accordion__trigger {
+    background-color: var(--g-ol-800);
+    color: var(--g-cr-100);
+}
+.md3-accordion--standard.md3-block--tonal .md3-accordion__body {
+    background-color: var(--g-ol-200);
+    color: var(--g-ol-900);
+}
+.md3-accordion--standard.md3-block--tonal .md3-accordion__item {
+    border-color: var(--g-ol-400, var(--g-ol-500));
+}
+
+/* Standard — Accent */
+.md3-accordion--standard.md3-block--accent .md3-accordion__trigger {
+    background-color: var(--g-or-600);
+    color: #ffffff;
+}
+.md3-accordion--standard.md3-block--accent .md3-accordion__trigger:hover {
+    background-color: var(--g-or-500);
+    box-shadow: 0 0 10px 2px var(--g-glow-cta);
+}
+.md3-accordion--standard.md3-block--accent .md3-accordion__item--open .md3-accordion__trigger {
+    background-color: var(--g-or-600);
+    color: #ffffff;
+}
+.md3-accordion--standard.md3-block--accent .md3-accordion__body {
+    background-color: rgba(196, 90, 0, 0.08);
+    color: var(--g-ol-900);
+}
+.md3-accordion--standard.md3-block--accent .md3-accordion__item {
+    border-color: var(--g-or-400);
+}
+
+/* ===============================================
+   FILLED STYLE
+   =============================================== */
+
+/* Filled — Light */
+.md3-accordion--filled.md3-block--light .md3-accordion__trigger {
+    background-color: var(--g-cr-200);
+    color: var(--g-ol-900);
+}
+.md3-accordion--filled.md3-block--light .md3-accordion__trigger:hover {
+    background-color: var(--g-cr-300);
+    box-shadow: 0 0 8px 2px var(--g-glow-primary);
+}
+.md3-accordion--filled.md3-block--light .md3-accordion__item--open .md3-accordion__trigger {
+    background-color: var(--g-ol-200);
+    color: var(--g-ol-900);
+}
+.md3-accordion--filled.md3-block--light .md3-accordion__body {
+    background-color: var(--g-cr-100);
+    color: var(--g-ol-900);
+}
+.md3-accordion--filled.md3-block--light .md3-accordion__item {
+    border-color: var(--g-ol-300);
+}
+
+/* Filled — Dark */
+.md3-accordion--filled.md3-block--dark .md3-accordion__trigger {
+    background-color: var(--g-ol-800);
+    color: var(--g-cr-100);
+}
+.md3-accordion--filled.md3-block--dark .md3-accordion__trigger:hover {
+    background-color: var(--g-ol-700);
+    box-shadow: 0 0 8px 2px var(--g-glow-primary);
+}
+.md3-accordion--filled.md3-block--dark .md3-accordion__item--open .md3-accordion__trigger {
+    background-color: var(--g-ol-600);
+    color: var(--g-cr-100);
+}
+.md3-accordion--filled.md3-block--dark .md3-accordion__body {
+    background-color: var(--g-ol-900);
+    color: var(--g-cr-200);
+}
+.md3-accordion--filled.md3-block--dark .md3-accordion__item {
+    border-color: var(--g-ol-600);
+}
+
+/* Filled — Tonal */
+.md3-accordion--filled.md3-block--tonal .md3-accordion__trigger {
+    background-color: var(--g-ol-300);
+    color: var(--g-ol-900);
+}
+.md3-accordion--filled.md3-block--tonal .md3-accordion__trigger:hover {
+    background-color: var(--g-ol-200);
+    box-shadow: 0 0 8px 2px var(--g-glow-primary);
+}
+.md3-accordion--filled.md3-block--tonal .md3-accordion__item--open .md3-accordion__trigger {
+    background-color: var(--g-ol-500);
+    color: var(--g-cr-100);
+}
+.md3-accordion--filled.md3-block--tonal .md3-accordion__body {
+    background-color: var(--g-ol-200);
+    color: var(--g-ol-900);
+}
+.md3-accordion--filled.md3-block--tonal .md3-accordion__item {
+    border-color: var(--g-ol-400, var(--g-ol-500));
+}
+
+/* Filled — Accent */
+.md3-accordion--filled.md3-block--accent .md3-accordion__trigger {
+    background-color: rgba(196, 90, 0, 0.15);
+    color: var(--g-ol-900);
+}
+.md3-accordion--filled.md3-block--accent .md3-accordion__trigger:hover {
+    background-color: rgba(196, 90, 0, 0.25);
+    box-shadow: 0 0 8px 2px var(--g-glow-cta);
+}
+.md3-accordion--filled.md3-block--accent .md3-accordion__item--open .md3-accordion__trigger {
+    background-color: var(--g-or-600);
+    color: #ffffff;
+}
+.md3-accordion--filled.md3-block--accent .md3-accordion__body {
+    background-color: var(--g-cr-100);
+    color: var(--g-ol-900);
+}
+.md3-accordion--filled.md3-block--accent .md3-accordion__item {
+    border-color: var(--g-or-300);
+}
+
+/* ===============================================
+   TACTICAL STYLE (military — 3 variants only)
+   =============================================== */
+
+.md3-accordion--tactical .md3-accordion__trigger {
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 14px 20px;
+}
+
+/* Tactical — Light */
+.md3-accordion--tactical.md3-block--light .md3-accordion__trigger {
+    background-color: var(--g-ol-900);
+    color: var(--g-ol-300);
+    border-left: 4px solid var(--g-or-500);
+}
+.md3-accordion--tactical.md3-block--light .md3-accordion__trigger:hover {
+    background-color: var(--g-ol-800);
+    box-shadow: 0 0 12px 3px var(--g-glow-primary);
+}
+.md3-accordion--tactical.md3-block--light .md3-accordion__item--open .md3-accordion__trigger {
+    color: var(--g-or-300);
+    border-left-color: var(--g-or-400);
+}
+.md3-accordion--tactical.md3-block--light .md3-accordion__body {
+    background-color: var(--g-cr-100);
+    color: var(--g-ol-900);
+    border-left: 4px solid var(--g-ol-500);
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+}
+.md3-accordion--tactical.md3-block--light .md3-accordion__item {
+    border-color: var(--g-ol-700);
+}
+
+/* Tactical — Dark */
+.md3-accordion--tactical.md3-block--dark .md3-accordion__trigger {
+    background-color: var(--g-ol-900);
+    color: var(--g-ol-300);
+    border-left: 4px solid var(--g-or-600);
+}
+.md3-accordion--tactical.md3-block--dark .md3-accordion__trigger:hover {
+    background-color: var(--g-ol-800);
+    box-shadow: 0 0 12px 3px var(--g-glow-primary);
+}
+.md3-accordion--tactical.md3-block--dark .md3-accordion__item--open .md3-accordion__trigger {
+    color: var(--g-or-300);
+    border-left-color: var(--g-or-400);
+}
+.md3-accordion--tactical.md3-block--dark .md3-accordion__body {
+    background-color: #0a0e06;
+    color: var(--g-ol-300);
+    border-left: 4px solid var(--g-ol-600);
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+}
+.md3-accordion--tactical.md3-block--dark .md3-accordion__item {
+    border-color: var(--g-ol-700);
+}
+
+/* Tactical — Tonal */
+.md3-accordion--tactical.md3-block--tonal .md3-accordion__trigger {
+    background-color: var(--g-ol-800);
+    color: var(--g-ol-300);
+    border-left: 4px solid var(--g-or-500);
+}
+.md3-accordion--tactical.md3-block--tonal .md3-accordion__trigger:hover {
+    background-color: var(--g-ol-700);
+    box-shadow: 0 0 12px 3px var(--g-glow-primary);
+}
+.md3-accordion--tactical.md3-block--tonal .md3-accordion__item--open .md3-accordion__trigger {
+    color: var(--g-or-300);
+}
+.md3-accordion--tactical.md3-block--tonal .md3-accordion__body {
+    background-color: var(--g-ol-200);
+    color: var(--g-ol-900);
+    border-left: 4px solid var(--g-or-500);
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+}
+.md3-accordion--tactical.md3-block--tonal .md3-accordion__item {
+    border-color: var(--g-ol-600);
+}
