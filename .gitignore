@@ -36,3 +36,9 @@ Thumbs.db
 # Logs
 *.log
 /logs/
+
+# Material Web build toolchain
+/packages/guerrilla/node_modules/
+
+# Deployment zip artefacts
+guerrilla-v*.zip
