@@ -19,7 +19,7 @@ $pages        = $pages ?? $cArray ?? [];
             <?php foreach ($pages as $page): ?>
             <article class="md3-page-list__card md3-glow-primary">
                 <?php
-                $thumb = isset($controller) ? $controller->getPageThumbnail($page) : null;
+                $thumb = $page->getAttribute('thumbnail');
                 if ($thumb): ?>
                 <div class="md3-page-list__card-img">
                     <img src="<?= htmlspecialchars($thumb->getRelativePath()) ?>"
@@ -51,7 +51,7 @@ $pages        = $pages ?? $cArray ?? [];
             <?php foreach ($pages as $page): ?>
             <li class="md3-page-list__hitem md3-glow-primary">
                 <?php
-                $thumb = isset($controller) ? $controller->getPageThumbnail($page) : null;
+                $thumb = $page->getAttribute('thumbnail');
                 if ($thumb): ?>
                 <div class="md3-page-list__hitem-img">
                     <img src="<?= htmlspecialchars($thumb->getRelativePath()) ?>"

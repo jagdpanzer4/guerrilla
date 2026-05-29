@@ -16,7 +16,11 @@ $colorVariant = $colorVariant ?? 'md3-block--light';
 
     <?php if ($layout === 'icon-left'): ?>
     <div class="md3-feature__inner md3-feature__inner--row">
-        <?php if (!empty($icon)): ?>
+        <?php if (!empty($iconHtml)): ?>
+        <div class="md3-feature__icon-wrap">
+            <?= $iconHtml ?>
+        </div>
+        <?php elseif (!empty($icon)): ?>
         <div class="md3-feature__icon-wrap">
             <span class="md3-feature__icon <?= htmlspecialchars($icon) ?>"></span>
         </div>
@@ -24,7 +28,11 @@ $colorVariant = $colorVariant ?? 'md3-block--light';
         <div class="md3-feature__content">
     <?php else: ?>
     <div class="md3-feature__inner">
-        <?php if (!empty($icon)): ?>
+        <?php if (!empty($iconHtml)): ?>
+        <div class="md3-feature__icon-wrap">
+            <?= $iconHtml ?>
+        </div>
+        <?php elseif (!empty($icon)): ?>
         <div class="md3-feature__icon-wrap">
             <span class="md3-feature__icon <?= htmlspecialchars($icon) ?>"></span>
         </div>

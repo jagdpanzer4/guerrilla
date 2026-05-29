@@ -1,0 +1,96 @@
+.md3-block--breadcrumb {
+    padding: 10px 20px;
+    border-radius: 6px;
+}
+
+.md3-breadcrumb__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+}
+
+.md3-breadcrumb__item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.md3-breadcrumb__link {
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s, text-shadow 0.2s;
+}
+
+/* Light variant */
+.md3-block--light.md3-block--breadcrumb .md3-breadcrumb__link {
+    color: var(--g-ol-700);
+}
+.md3-block--light.md3-block--breadcrumb .md3-breadcrumb__link:hover {
+    color: var(--g-or-600);
+    text-shadow: 0 0 8px var(--g-glow-cta);
+}
+.md3-block--light.md3-block--breadcrumb .md3-breadcrumb__label {
+    color: var(--g-ol-900);
+    font-weight: 600;
+}
+.md3-block--light.md3-block--breadcrumb .md3-breadcrumb__sep {
+    color: var(--g-ol-500);
+    font-size: 10px;
+}
+
+/* Dark variant */
+.md3-block--dark.md3-block--breadcrumb .md3-breadcrumb__link {
+    color: var(--g-ol-300);
+}
+.md3-block--dark.md3-block--breadcrumb .md3-breadcrumb__link:hover {
+    color: var(--g-or-300);
+    text-shadow: 0 0 8px var(--g-glow-cta);
+}
+.md3-block--dark.md3-block--breadcrumb .md3-breadcrumb__label {
+    color: var(--g-cr-100);
+    font-weight: 600;
+}
+.md3-block--dark.md3-block--breadcrumb .md3-breadcrumb__sep {
+    color: var(--g-ol-500);
+    font-size: 10px;
+}
+
+/* Tonal variant */
+.md3-block--tonal.md3-block--breadcrumb .md3-breadcrumb__link {
+    color: var(--g-ol-700);
+}
+.md3-block--tonal.md3-block--breadcrumb .md3-breadcrumb__link:hover {
+    color: var(--g-or-600);
+    text-shadow: 0 0 8px var(--g-glow-cta);
+}
+.md3-block--tonal.md3-block--breadcrumb .md3-breadcrumb__label {
+    color: var(--g-ol-900);
+    font-weight: 600;
+}
+.md3-block--tonal.md3-block--breadcrumb .md3-breadcrumb__sep {
+    color: var(--g-ol-600);
+    font-size: 10px;
+}
+
+/* Accent variant */
+.md3-block--accent.md3-block--breadcrumb .md3-breadcrumb__link {
+    color: rgba(255,255,255,0.85);
+}
+.md3-block--accent.md3-block--breadcrumb .md3-breadcrumb__link:hover {
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(255,255,255,0.6);
+}
+.md3-block--accent.md3-block--breadcrumb .md3-breadcrumb__label {
+    color: #ffffff;
+    font-weight: 600;
+}
+.md3-block--accent.md3-block--breadcrumb .md3-breadcrumb__sep {
+    color: rgba(255,255,255,0.5);
+    font-size: 10px;
+}

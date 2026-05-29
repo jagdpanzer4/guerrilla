@@ -1,17 +1,13 @@
 <?php defined('C5_EXECUTE') or die('Access Denied.');
 /**
  * MD3 Image Block — base template
- * @var \Concrete\Core\Entity\File\File $f
- * @var string $altText
- * @var string $title
- * @var string $caption
- * @var string $href
- * @var bool   $openLinkInNewWindow
- * @var string $colorVariant
+ * CCMS provides: $f, $altText, $title, $linkURL, $openLinkInNewWindow
  */
 $colorVariant = $colorVariant ?? 'md3-block--light';
-$src = $f ? $f->getRelativePath() : '';
+$src = ($f && is_object($f)) ? $f->getRelativePath() : '';
+$href = $linkURL ?? '';
 $target = !empty($openLinkInNewWindow) ? ' target="_blank" rel="noopener"' : '';
+?>
 ?>
 <div class="md3-block <?= htmlspecialchars($colorVariant) ?> md3-block--image">
     <?php if ($src): ?>
