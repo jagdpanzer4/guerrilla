@@ -684,6 +684,116 @@ tr:hover td { background-color: var(--g-ol-100); }
 }
 
 /* ============================================================
+   12. PAGE CONTAINERS
+   Styles for elements/containers/* templates.
+   g-stripe = full-width section; g-inner = centred content wrap.
+   ============================================================ */
+
+/* Shared section wrapper */
+.g-stripe {
+    width: 100%;
+    padding: var(--g-space-2xl) 0;
+}
+
+/* Centred content wrapper — same max-width as main content */
+.g-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--g-space-lg);
+    width: 100%;
+}
+
+/* ---- Highlight Stripe (light_stripe) ---- */
+.g-stripe--highlight {
+    background-color: var(--g-cr-200);
+    border-top: 3px solid var(--g-ol-300);
+    border-bottom: 3px solid var(--g-ol-300);
+}
+.g-stripe--highlight .g-stripe__title-wrap {
+    margin-bottom: var(--g-space-xl);
+    text-align: center;
+}
+.g-stripe--highlight .g-stripe__title-wrap h1,
+.g-stripe--highlight .g-stripe__title-wrap h2,
+.g-stripe--highlight .g-stripe__title-wrap h3,
+.g-stripe--highlight .g-stripe__title-wrap h4 {
+    color: var(--g-ol-900);
+    margin-bottom: 0;
+}
+
+/* ---- Two-Column variants (two_column_light, two_column_condensed) ---- */
+.g-stripe--two-col {
+    background-color: var(--g-cr-100);
+}
+.g-stripe--two-col .g-col {
+    padding-top: var(--g-space-md);
+    padding-bottom: var(--g-space-md);
+}
+/* Visual divider between columns */
+.g-stripe--two-col .g-col + .g-col {
+    border-left: 1px solid var(--g-ol-200);
+}
+@media (max-width: 767px) {
+    .g-stripe--two-col .g-col + .g-col {
+        border-left: none;
+        border-top: 1px solid var(--g-ol-200);
+        padding-top: var(--g-space-xl);
+    }
+}
+
+/* Condensed variant — extra horizontal padding inside columns */
+.g-stripe--condensed .g-col__inner {
+    padding: 0 var(--g-space-xl);
+}
+@media (max-width: 767px) {
+    .g-stripe--condensed .g-col__inner {
+        padding: 0;
+    }
+}
+
+/* ---- Grid variants (grid_four, grid_six) ---- */
+.g-stripe--grid {
+    background-color: var(--g-cr-100);
+}
+.g-stripe--grid .g-col {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Edit mode — show empty container areas */
+.ccm-edit-mode .g-col {
+    min-height: 80px;
+}
+
+/* ---- Dark variant modifier (use via custom styles on container) ---- */
+.g-stripe--dark {
+    background-color: var(--g-ol-900);
+    color: var(--g-cr-100);
+    border-color: var(--g-ol-700);
+}
+.g-stripe--dark h1, .g-stripe--dark h2,
+.g-stripe--dark h3, .g-stripe--dark h4,
+.g-stripe--dark h5, .g-stripe--dark h6 {
+    color: var(--g-cr-100);
+}
+.g-stripe--dark .g-col + .g-col {
+    border-color: var(--g-ol-700);
+}
+
+/* ---- Accent variant (orange CTA stripe) ---- */
+.g-stripe--accent {
+    background-color: var(--g-or-600);
+    color: #fff;
+}
+.g-stripe--accent h1, .g-stripe--accent h2,
+.g-stripe--accent h3, .g-stripe--accent h4 {
+    color: #fff;
+}
+.g-stripe--accent .g-col + .g-col {
+    border-color: rgba(255,255,255,0.25);
+}
+
+/* ============================================================
    12. CCMS UI ISOLATION
    Reset our theme styles inside ConcreteCMS admin UI elements
    (panel, toolbar, dialogs) so they don't interfere.
