@@ -42,6 +42,15 @@ Thumbs.db
 
 # Deployment zip artefacts
 guerrilla-v*.zip
+docker/ccms.zip
+
+# ConcreteCMS bootstrap files (generated/downloaded, not part of package)
+index.php
+.htaccess
+composer.lock
+concrete/
+application/bootstrap/autoload.php
+application/bootstrap/start.php
 
 # Visual brainstorming sessions
 .superpowers/
