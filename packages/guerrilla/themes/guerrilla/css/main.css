@@ -993,3 +993,32 @@ tr:hover td { background-color: var(--g-ol-100); }
  * Our #site-header is z-index: 200 — well below all of them.
  * Overriding with !important breaks Popper.js dropdown positioning.
  */
+
+/* =============================================================
+ * Section 14: Board Block
+ * ============================================================= */
+.g-board { padding: var(--g-space-xl) 0; }
+.g-board .ccm-board-slot { margin-bottom: var(--g-space-lg); }
+
+/* =============================================================
+ * Section 15: Hero Image Block
+ * (Additional global tokens — main styles in blocks/hero_image/view.css)
+ * ============================================================= */
+.g-hero a.md3-glow-cta { display: inline-flex; align-items: center; }
+
+/* =============================================================
+ * Section 16: Image Slider Block
+ * (Styles in blocks/image_slider/view.css — mega-link helper)
+ * ============================================================= */
+.g-slider .mega-link-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: block;
+    text-indent: -999em;
+}
+
+/* =============================================================
+ * Section 17: Testimonial Block
+ * (Styles in blocks/testimonial/view.css)
+ * ============================================================= */

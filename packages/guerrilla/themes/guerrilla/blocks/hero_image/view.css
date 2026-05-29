@@ -1,0 +1,156 @@
+/* ============================================================
+   Hero Image Block — Guerrilla MD3 Theme
+   ============================================================ */
+
+/* ---- Base ---- */
+.g-hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    overflow: hidden;
+    width: 100%;
+}
+
+/* Background image layer */
+.g-hero__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: scale(1.03); /* slight bleed for parallax breathing room */
+    transition: transform 8s ease;
+}
+.g-hero:hover .g-hero__bg { transform: scale(1.06); }
+
+/* Dark tactical overlay */
+.g-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        160deg,
+        rgba(45, 58, 26, 0.78) 0%,
+        rgba(45, 58, 26, 0.55) 50%,
+        rgba(45, 58, 26, 0.35) 100%
+    );
+}
+
+/* Content wrapper */
+.g-hero__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 80px 0;
+}
+
+.g-hero__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--g-space-lg, 24px);
+    width: 100%;
+    max-width: 680px;
+    margin-left: clamp(24px, 8vw, 120px);
+}
+
+/* Title */
+.g-hero__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: #fff;
+    text-shadow: 0 2px 16px rgba(0,0,0,0.5);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5em;
+    line-height: 1.15;
+}
+
+/* Body text */
+.g-hero__body {
+    color: rgba(255, 255, 255, 0.88);
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 1.65;
+    margin-bottom: 2rem;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+}
+.g-hero__body p { max-width: 100%; color: inherit; }
+
+/* CTA */
+.g-hero__cta { margin-top: 1.5rem; }
+.g-hero__btn-icon { margin-right: 8px; }
+
+/* MD3 button overrides for light context */
+.g-hero .md3-btn--outlined-light {
+    color: #fff;
+    border-color: rgba(255,255,255,0.7);
+    background: transparent;
+}
+.g-hero .md3-btn--outlined-light:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: #fff;
+}
+.g-hero .md3-btn--text { color: rgba(255,255,255,0.9); background: transparent; border: none; }
+
+/* ---- Offset Title variant ---- */
+.g-hero--offset {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    min-height: 480px;
+    overflow: hidden;
+    background: var(--g-ol-900);
+}
+
+.g-hero--offset .g-hero__offset-img {
+    overflow: hidden;
+    position: relative;
+}
+.g-hero--offset .g-hero__offset-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.g-hero--offset .g-hero__offset-panel {
+    background: var(--g-ol-900);
+    padding: clamp(32px, 6vw, 72px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 4px solid var(--g-or-500);
+}
+
+.g-hero--offset .g-hero__title {
+    font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+    margin-bottom: 0.75em;
+}
+.g-hero--offset .g-hero__body { color: var(--g-ol-200); font-size: 1rem; }
+
+/* Dark button variant for offset panel */
+.g-hero .md3-btn--outlined-dark {
+    color: var(--g-or-300);
+    border-color: var(--g-or-500);
+    background: transparent;
+}
+.g-hero .md3-btn--outlined-dark:hover {
+    background: rgba(224, 106, 0, 0.15);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    .g-hero--offset {
+        grid-template-columns: 1fr;
+    }
+    .g-hero--offset .g-hero__offset-img {
+        min-height: 240px;
+    }
+    .g-hero--offset .g-hero__offset-panel {
+        border-left: none;
+        border-top: 4px solid var(--g-or-500);
+    }
+    .g-hero__inner { margin-left: 24px; margin-right: 24px; }
+}

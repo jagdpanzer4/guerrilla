@@ -1,0 +1,173 @@
+/* ============================================================
+   Image Slider Block — Guerrilla MD3 Theme
+   ============================================================ */
+
+/* Edit mode placeholder */
+.g-slider__edit-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--g-ol-900);
+    color: var(--g-ol-300);
+    padding: 48px 24px;
+    border: 2px dashed var(--g-ol-600);
+    border-radius: 6px;
+    text-align: center;
+}
+.g-slider__edit-placeholder i { font-size: 2.5rem; }
+.g-slider__edit-placeholder--hero { min-height: 320px; }
+
+/* Container resets */
+.g-slider,
+.g-slider .ccm-image-slider,
+.g-slider .ccm-image-slider-inner {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+/* rslides base */
+.g-slider .rslides {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+.g-slider .rslides li { display: none; }
+.g-slider .rslides li:first-child { display: block; }
+.g-slider .rslides img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Empty state */
+.g-slider__empty {
+    padding: var(--g-space-xl);
+    text-align: center;
+    background: var(--g-ol-900);
+    color: var(--g-ol-300);
+}
+
+/* ---- Default slider caption ---- */
+.g-slider__slide { position: relative; }
+
+.g-slider__caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(45,58,26,0.88) 0%, transparent 100%);
+    padding: var(--g-space-xl) var(--g-space-lg) var(--g-space-lg);
+}
+.g-slider__caption-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.g-slider__title {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 0.35em;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+.g-slider__desc {
+    color: var(--g-ol-200);
+    font-size: 0.95rem;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+
+/* ---- Arrow / pager overrides ---- */
+.g-slider .rslides_nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(45,58,26,0.7);
+    border: 2px solid var(--g-ol-500);
+    color: var(--g-or-300);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+.g-slider .rslides_nav:hover {
+    background: var(--g-ol-800);
+    box-shadow: 0 0 12px 2px var(--g-glow-primary);
+}
+.g-slider .rslides_nav.prev { left: 16px; }
+.g-slider .rslides_nav.next { right: 16px; }
+
+.g-slider .rslides_tabs {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 10;
+}
+.g-slider .rslides_tabs li a {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    border: 2px solid rgba(255,255,255,0.6);
+    text-indent: -999em;
+    overflow: hidden;
+}
+.g-slider .rslides_tabs .rslides_here a,
+.g-slider .rslides_tabs li a:hover {
+    background: var(--g-or-400);
+    border-color: var(--g-or-300);
+}
+
+/* ---- Hero Slider variant ---- */
+.g-slider--hero .rslides img {
+    min-height: 60vh;
+    object-fit: cover;
+}
+
+.g-slider__hero-caption {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+        160deg,
+        rgba(45,58,26,0.72) 0%,
+        rgba(45,58,26,0.45) 60%,
+        rgba(45,58,26,0.25) 100%
+    );
+}
+.g-slider__hero-caption-inner {
+    text-align: center;
+    max-width: 720px;
+    padding: 0 var(--g-space-lg);
+}
+.g-slider__hero-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: #fff;
+    text-shadow: 0 2px 16px rgba(0,0,0,0.55);
+    margin-bottom: 0.5em;
+    letter-spacing: -0.02em;
+}
+.g-slider__hero-desc {
+    color: rgba(255,255,255,0.88);
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+}
