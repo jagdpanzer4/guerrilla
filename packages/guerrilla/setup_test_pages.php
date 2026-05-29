@@ -133,13 +133,18 @@ function g_create_page(string $name, string $handle, string $description = ''): 
         'cName'        => $name,
         'cHandle'      => $handle,
         'cDescription' => $description,
-        'pTemplateID'  => $tmpl->getPageTemplateID(),
     ]);
     if (!$page || $page->isError()) {
         g_log("ERROR creating page '{$handle}'");
         return null;
     }
-    g_log("Created page: /{$handle} (ID={$page->getCollectionID()})");
+    // Page::add() ignores pTemplateID — set template via direct DB update
+    $db = \Concrete\Core\Support\Facade\Application::getFacadeApplication()->make('database/connection');
+    $db->executeQuery(
+        'UPDATE CollectionVersions cv JOIN Collections c ON c.cID=cv.cID SET cv.pTemplateID=? WHERE c.cHandle=?',
+        [$tmpl->getPageTemplateID(), $handle]
+    );
+    g_log("Created page: /{$handle} (ID={$page->getCollectionID()}, template={$tmpl->getPageTemplateHandle()})");
     return $page;
 }
 

@@ -3,11 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php $view->inc('elements/header_required.php'); ?>
-    <title><?php echo $c->getCollectionName(); ?> | <?php echo $site->getName(); ?></title>
+    <?php
+    $site = \Concrete\Core\Support\Facade\Site::getSite();
+    $siteName = $site ? $site->getSiteName() : '';
+    View::element('header_required', [
+        'pageTitle'        => isset($pageTitle) ? $pageTitle : $c->getCollectionName(),
+        'pageDescription'  => isset($pageDescription) ? $pageDescription : '',
+        'pageMetaKeywords' => isset($pageMetaKeywords) ? $pageMetaKeywords : '',
+    ]);
+    ?>
+    <title><?php echo $c->getCollectionName(); ?><?php echo $siteName ? ' | ' . $siteName : ''; ?></title>
     <link rel="stylesheet" href="<?php echo $view->getThemePath(); ?>/css/main.css">
 </head>
-<body class="<?php echo $c->getBodyClass(); ?> g-full-width-body">
+<body class="ccm-page-id-<?php echo $c->getCollectionID(); ?> g-full-width-body">
+<div class="ccm-page">
 
     <?php $view->inc('elements/header.php'); ?>
 
@@ -20,7 +29,9 @@
 
     <?php $view->inc('elements/footer.php'); ?>
 
-    <?php $view->inc('elements/footer_required.php'); ?>
+</div><!-- /.ccm-page -->
+
+    <?php View::element('footer_required'); ?>
     <script src="<?php echo $view->getThemePath(); ?>/js/main.js"></script>
 </body>
 </html>

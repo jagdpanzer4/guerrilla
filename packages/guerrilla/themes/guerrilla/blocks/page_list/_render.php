@@ -80,7 +80,7 @@ $pages        = $pages ?? $cArray ?? [];
         <?php if ($featured): ?>
         <div class="md3-page-list__featured">
             <?php
-            $thumb = isset($controller) ? $controller->getPageThumbnail($featured) : null;
+            $thumb = $featured ? $featured->getAttribute('thumbnail') : null;
             if ($thumb): ?>
             <div class="md3-page-list__featured-img">
                 <img src="<?= htmlspecialchars($thumb->getRelativePath()) ?>"
