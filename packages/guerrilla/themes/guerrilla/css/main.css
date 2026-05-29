@@ -290,6 +290,17 @@ hr {
     top: var(--ccm-toolbar-height);
 }
 
+/*
+ * CCMS edit mode — allow block drag handles to extend outside the header.
+ * position:sticky + implicit overflow clipping prevents the CCMS drag
+ * overlay from appearing above the block bounds in the nav area.
+ */
+.ccm-edit-mode #site-header,
+.ccm-edit-mode .g-header__inner,
+.ccm-edit-mode .g-header__nav {
+    overflow: visible !important;
+}
+
 /* ============================================================
    5. LAYOUT — MAIN CONTENT
    ============================================================ */

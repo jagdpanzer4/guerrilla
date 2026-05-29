@@ -13,8 +13,9 @@ $siteName = $site ? $site->getSiteName() : '';
         </a>
         <div class="g-header__nav" role="navigation" aria-label="<?php echo t('Main navigation'); ?>">
             <?php
-            $navBlock = new GlobalArea('Main Nav');
-            $navBlock->display($c);
+            $navArea = new GlobalArea('Main Nav');
+            $navArea->setCustomTemplate('autonav', 'cream-topbar');
+            $navArea->display($c);
             ?>
         </div>
     </div>
