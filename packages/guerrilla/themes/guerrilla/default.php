@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
     $view->inc('elements/header_required.php');
+    $site = \Concrete\Core\Support\Facade\Site::getSite();
+    $siteName = $site ? $site->getSiteName() : '';
     ?>
-    <title><?php echo $c->getCollectionName(); ?> | <?php echo $site->getName(); ?></title>
+    <title><?php echo $c->getCollectionName(); ?><?php echo $siteName ? ' | ' . $siteName : ''; ?></title>
     <link rel="stylesheet" href="<?php echo $view->getThemePath(); ?>/css/main.css">
 </head>
-<body class="<?php echo $c->getBodyClass(); ?>">
+<body class="ccm-page-id-<?php echo $c->getCollectionID(); ?>">
 
     <?php $view->inc('elements/header.php'); ?>
 

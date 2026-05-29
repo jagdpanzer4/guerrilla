@@ -1,15 +1,14 @@
 <?php
 /** @var \Concrete\Core\Page\Page $c */
 /** @var \Concrete\Core\View\View $view */
-/** @var \Concrete\Core\Site\Service $site */
 
-$navItems = [];
-$nav = \Concrete\Core\Support\Facade\NavigationFactory::getPageListCustom();
+$site = \Concrete\Core\Support\Facade\Site::getSite();
+$siteName = $site ? $site->getSiteName() : '';
 ?>
 <header id="site-header" class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="<?php echo BASE_URL; ?>">
-            <?php echo $site->getName(); ?>
+            <?php echo $siteName; ?>
         </a>
 
         <button class="navbar-toggler" type="button"

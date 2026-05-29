@@ -10,9 +10,9 @@ defined('C5_EXECUTE') or die('Access Denied.');
 
 class Controller extends Package
 {
-    protected string $pkgHandle = 'guerrilla';
-    protected string $appVersionRequired = '9.5.0';
-    protected string $pkgVersion = '1.0.0';
+    protected $pkgHandle = 'guerrilla';
+    protected $appVersionRequired = '9.5.0';
+    protected $pkgVersion = '1.0.0';
     protected $pkgAutoloaderRegistries = [];
 
     public function getPackageDescription(): string
