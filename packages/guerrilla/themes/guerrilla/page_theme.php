@@ -41,6 +41,6 @@ class PageTheme extends Theme
      */
     public function getThemePageTypes(): array
     {
-        return ['full', 'left_sidebar'];
+        return ['full', 'full_width', 'left_sidebar'];
     }
 }

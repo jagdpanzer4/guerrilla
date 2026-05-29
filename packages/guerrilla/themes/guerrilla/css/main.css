@@ -150,7 +150,7 @@ blockquote {
     margin: var(--g-space-lg) 0;
     padding: var(--g-space-md) var(--g-space-lg);
     border-left: 4px solid var(--g-or-500);
-    background: var(--g-cr-200);
+ /*   background: var(--g-cr-200); */
     font-style: italic;
     color: var(--g-ol-700);
     border-radius: 0 6px 6px 0;
@@ -1022,3 +1022,25 @@ tr:hover td { background-color: var(--g-ol-100); }
  * Section 17: Testimonial Block
  * (Styles in blocks/testimonial/view.css)
  * ============================================================= */
+
+/* =============================================================
+ * Section 18: Full-Width Page Template
+ * ============================================================= */
+.g-fw-main {
+    width: 100%;
+    padding: 0;
+    overflow-x: hidden;
+}
+/* Let content blocks inside full-width template use a standard reading width */
+.g-fw-main .g-content-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--g-space-xl) var(--g-space-lg);
+}
+/* Hero, slider, testimonial hero — allowed to bleed full width */
+.g-fw-main .g-hero,
+.g-fw-main .g-slider,
+.g-fw-main .g-testimonial--hero,
+.g-fw-main .g-stripe {
+    width: 100%;
+}
