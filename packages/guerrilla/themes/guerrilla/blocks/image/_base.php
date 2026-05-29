@@ -8,7 +8,6 @@ $src = ($f && is_object($f)) ? $f->getRelativePath() : '';
 $href = $linkURL ?? '';
 $target = !empty($openLinkInNewWindow) ? ' target="_blank" rel="noopener"' : '';
 ?>
-?>
 <div class="md3-block <?= htmlspecialchars($colorVariant) ?> md3-block--image">
     <?php if ($src): ?>
         <figure class="md3-block__figure">
