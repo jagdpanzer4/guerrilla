@@ -233,7 +233,6 @@ hr {
 /* MD3 nav sits directly inside header — no wrapper conflicts */
 .g-header__nav .md3-nav {
     flex: 1;
-    background: transparent !important;
     border: none !important;
 }
 .g-header__nav .md3-nav__bar {
@@ -246,8 +245,8 @@ hr {
     height: 100%;
     align-items: center;
 }
+/* Shared layout props — applied to both dark and cream */
 .g-header__nav .md3-nav__link {
-    color: var(--g-ol-300) !important;
     font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 0.07em;
@@ -255,18 +254,35 @@ hr {
     border-radius: 4px;
     padding: 8px 14px;
 }
-.g-header__nav .md3-nav__link:hover {
+
+/* Dark-topbar variant inside header — explicit colour overrides */
+.g-header__nav .md3-nav--dark-topbar {
+    background: transparent !important;
+}
+.g-header__nav .md3-nav--dark-topbar .md3-nav__link {
+    color: var(--g-ol-300) !important;
+}
+.g-header__nav .md3-nav--dark-topbar .md3-nav__link:hover {
     color: var(--g-cr-100) !important;
     background-color: var(--g-ol-700) !important;
     text-shadow: 0 0 8px var(--g-glow-primary) !important;
     box-shadow: none !important;
 }
-.g-header__nav .md3-nav__item--current > .md3-nav__link {
+.g-header__nav .md3-nav--dark-topbar .md3-nav__item--current > .md3-nav__link {
     color: var(--g-or-300) !important;
     background-color: var(--g-ol-800) !important;
 }
-.g-header__nav .md3-nav__hamburger {
+.g-header__nav .md3-nav--dark-topbar .md3-nav__hamburger {
     background-color: var(--g-ol-300) !important;
+}
+
+/* Cream-topbar variant inside header — inherits view.css colours, no !important override */
+.g-header__nav .md3-nav--cream-topbar {
+    background: var(--g-cr-100);
+    border-bottom: none !important; /* header already has a border */
+}
+.g-header__nav .md3-nav--cream-topbar .md3-nav__hamburger {
+    background-color: var(--g-ol-700) !important;
 }
 
 /* CCMS edit mode — push header below toolbar */

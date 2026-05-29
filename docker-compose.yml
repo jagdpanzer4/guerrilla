@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: guerrilla_web
+    ports:
+      - "8080:80"
+    volumes:
+      - ./packages/guerrilla:/var/www/html/packages/guerrilla
+      - ccms_files:/var/www/html/application/files
+      - ccms_config:/var/www/html/application/config
+    environment:
+      APP_URL: http://localhost:8080
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8.0
+    container_name: guerrilla_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: guerrilla
+      MYSQL_USER: guerrilla
+      MYSQL_PASSWORD: guerrilla
+    ports:
+      - "3307:3306"
+    volumes:
+      - guerrilla_db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  guerrilla_db:
+  ccms_files:
+  ccms_config:

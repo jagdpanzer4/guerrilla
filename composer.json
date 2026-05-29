@@ -15,7 +15,8 @@
         "optimize-autoloader": true,
         "sort-packages": true,
         "allow-plugins": {
-            "concrete5/core-installer": true
+            "concrete5/core-installer": true,
+            "mlocati/composer-patcher": true
         }
     },
     "extra": {
