@@ -1,19 +1,12 @@
 /* ============================================================
-   Guerrilla – Main Stylesheet
-   Concrete CMS 9.5 Theme
+   Guerrilla Theme — Main Stylesheet
+   ConcreteCMS 9.5 / MD3 Military Design System
    ============================================================ */
 
-/* Bootstrap 5 CDN is loaded via page_theme.php asset registration.
-   Add your custom overrides below. */
-
-/* ---- Root Variables ---- */
+/* ============================================================
+   1. DESIGN TOKENS
+   ============================================================ */
 :root {
-    --guerrilla-primary:   #1a1a2e;
-    --guerrilla-secondary: #16213e;
-    --guerrilla-accent:    #e94560;
-    --guerrilla-light:     #f5f5f5;
-    --guerrilla-font:      'Segoe UI', system-ui, sans-serif;
-
     /* Olive Green — Primary / Secondary */
     --g-ol-900: #2d3a1a;
     --g-ol-800: #364820;
@@ -22,6 +15,7 @@
     --g-ol-500: #6b883c;
     --g-ol-300: #adc47a;
     --g-ol-200: #cdd9a8;
+    --g-ol-100: #e8f0d4;
 
     /* Cream — Surface / Background */
     --g-cr-100: #f5f0e8;
@@ -35,193 +29,656 @@
     --g-or-300: #f59a4a;
 
     /* Glow — controllable per deployment */
-    --g-glow-primary:    rgba(107, 136, 60, 0.40);
-    --g-glow-cta:        rgba(224, 106, 0,  0.55);
-    --g-glow-intensity:  1;
-}
+    --g-glow-primary:   rgba(107, 136, 60,  0.40);
+    --g-glow-cta:       rgba(224, 106, 0,   0.55);
+    --g-glow-intensity: 1;
 
-/* ---- Base ---- */
-body {
-    font-family: var(--guerrilla-font);
-    background-color: #ffffff;
-    color: #333333;
-}
+    /* Typography */
+    --g-font-sans:  'Segoe UI', system-ui, -apple-system, sans-serif;
+    --g-font-mono:  'Courier New', Courier, monospace;
+    --g-font-size:  16px;
+    --g-line-height: 1.65;
 
-/* ---- Header ---- */
-#site-header {
-    background-color: var(--guerrilla-primary) !important;
-}
+    /* Spacing */
+    --g-space-xs:  4px;
+    --g-space-sm:  8px;
+    --g-space-md:  16px;
+    --g-space-lg:  24px;
+    --g-space-xl:  40px;
+    --g-space-2xl: 64px;
 
-#site-header .navbar-brand {
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: var(--guerrilla-accent) !important;
-}
+    /* Header */
+    --g-header-height: 64px;
+    --g-header-bg:     var(--g-ol-900);
 
-#site-header .nav-link {
-    color: rgba(255, 255, 255, 0.85) !important;
-    transition: color 0.2s ease;
-}
+    /* Transitions */
+    --g-transition: 0.2s ease;
 
-#site-header .nav-link:hover,
-#site-header .nav-link.active {
-    color: var(--guerrilla-accent) !important;
-}
-
-/* ---- Main Content ---- */
-#main-content {
-    min-height: 60vh;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-}
-
-/* ---- Footer ---- */
-#site-footer {
-    background-color: var(--guerrilla-primary) !important;
-    border-top: 3px solid var(--guerrilla-accent);
-}
-
-/* ---- Concrete CMS Edit Mode ---- */
-.ccm-edit-mode-panel-active #site-header {
-    top: var(--ccm-toolbar-height, 48px);
-}
-
-/* ---- Utilities ---- */
-.text-accent { color: var(--guerrilla-accent) !important; }
-.bg-primary-dark { background-color: var(--guerrilla-primary) !important; }
-
-/* ---- Responsive ---- */
-@media (max-width: 768px) {
-    #main-content {
-        padding-top: 1rem;
-    }
+    /* CCMS toolbar */
+    --ccm-toolbar-height: 48px;
 }
 
 /* ============================================================
-   MD3 Block Templates — Design System
+   2. RESET & BASE
    ============================================================ */
-
-
-/* --- Shared Block Wrapper --- */
-.md3-block {
+*, *::before, *::after {
     box-sizing: border-box;
-    font-family: 'Segoe UI', system-ui, sans-serif;
 }
 
-/* Color Variant — Light (default) */
-.md3-block--light {
+html {
+    font-size: var(--g-font-size);
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: var(--g-font-sans);
+    font-size: 1rem;
+    line-height: var(--g-line-height);
+    background-color: var(--g-cr-100);
+    color: var(--g-ol-900);
+    -webkit-font-smoothing: antialiased;
+}
+
+img, video, svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ============================================================
+   3. TYPOGRAPHY
+   ============================================================ */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--g-font-sans);
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--g-ol-900);
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    letter-spacing: -0.01em;
+}
+
+h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.4rem,  3vw, 2.1rem);  }
+h3 { font-size: clamp(1.15rem, 2.5vw, 1.6rem); }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.1rem;  }
+h6 { font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.08em; }
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    max-width: 72ch;
+}
+
+a {
+    color: var(--g-ol-600);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color var(--g-transition), text-shadow var(--g-transition);
+}
+a:hover {
+    color: var(--g-or-500);
+    text-shadow: 0 0 10px var(--g-glow-cta);
+    text-decoration: none;
+}
+
+strong, b  { font-weight: 700; }
+em, i      { font-style: italic; }
+small      { font-size: 0.85em; }
+code, kbd, pre, samp { font-family: var(--g-font-mono); font-size: 0.9em; }
+
+code {
+    background: var(--g-ol-100);
+    color: var(--g-ol-800);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+pre {
+    background: var(--g-ol-900);
+    color: var(--g-ol-200);
+    padding: var(--g-space-md);
+    border-radius: 6px;
+    overflow-x: auto;
+    line-height: 1.5;
+}
+
+blockquote {
+    margin: var(--g-space-lg) 0;
+    padding: var(--g-space-md) var(--g-space-lg);
+    border-left: 4px solid var(--g-or-500);
+    background: var(--g-cr-200);
+    font-style: italic;
+    color: var(--g-ol-700);
+    border-radius: 0 6px 6px 0;
+}
+
+ul, ol {
+    padding-left: 1.5em;
+    margin-bottom: 1rem;
+}
+li { margin-bottom: 0.35em; }
+
+hr {
+    border: none;
+    border-top: 1px solid var(--g-ol-200);
+    margin: var(--g-space-xl) 0;
+}
+
+/* Military section label */
+.g-label {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--g-ol-500);
+    margin-bottom: var(--g-space-xs);
+}
+
+/* ============================================================
+   4. LAYOUT — HEADER
+   ============================================================ */
+#site-header {
+    position: sticky;
+    top: 0;
+    z-index: 900;
+    background-color: var(--g-ol-900);
+    border-bottom: 2px solid var(--g-ol-700);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+}
+
+.g-header__inner {
+    display: flex;
+    align-items: stretch;
+    min-height: var(--g-header-height);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--g-space-lg);
+    gap: var(--g-space-lg);
+}
+
+/* Brand / Logo */
+.g-header__brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+.g-header__brand:hover { text-shadow: none; }
+.g-header__brand-text {
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--g-or-300);
+    transition: color var(--g-transition), text-shadow var(--g-transition);
+}
+.g-header__brand:hover .g-header__brand-text {
+    color: var(--g-cr-100);
+    text-shadow: 0 0 12px var(--g-glow-cta);
+}
+
+/* Nav area — fills remaining width */
+.g-header__nav {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-end;
+}
+
+/* MD3 nav sits directly inside header — no wrapper conflicts */
+.g-header__nav .md3-nav {
+    flex: 1;
+    background: transparent !important;
+    border: none !important;
+}
+.g-header__nav .md3-nav__bar {
+    height: 100%;
+    padding: 0;
+    min-height: var(--g-header-height);
+    justify-content: flex-end;
+}
+.g-header__nav .md3-nav__list {
+    height: 100%;
+    align-items: center;
+}
+.g-header__nav .md3-nav__link {
+    color: var(--g-ol-300) !important;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    border-radius: 4px;
+    padding: 8px 14px;
+}
+.g-header__nav .md3-nav__link:hover {
+    color: var(--g-cr-100) !important;
+    background-color: var(--g-ol-700) !important;
+    text-shadow: 0 0 8px var(--g-glow-primary) !important;
+    box-shadow: none !important;
+}
+.g-header__nav .md3-nav__item--current > .md3-nav__link {
+    color: var(--g-or-300) !important;
+    background-color: var(--g-ol-800) !important;
+}
+.g-header__nav .md3-nav__hamburger {
+    background-color: var(--g-ol-300) !important;
+}
+
+/* CCMS edit mode — push header below toolbar */
+.ccm-toolbar-visible #site-header {
+    top: var(--ccm-toolbar-height);
+}
+
+/* ============================================================
+   5. LAYOUT — MAIN CONTENT
+   ============================================================ */
+#main-content {
+    min-height: 60vh;
+    padding: var(--g-space-xl) var(--g-space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* CCMS area wrappers */
+.ccm-area-block-wrapper,
+.ccm-block-edit-overlay-inner {
+    margin-bottom: var(--g-space-lg);
+}
+
+/* ============================================================
+   6. LAYOUT — FOOTER
+   ============================================================ */
+#site-footer {
+    background-color: var(--g-ol-900);
+    color: var(--g-ol-200);
+    border-top: 3px solid var(--g-ol-700);
+    margin-top: var(--g-space-2xl);
+}
+
+.g-footer__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--g-space-xl) var(--g-space-lg) var(--g-space-lg);
+}
+
+.g-footer__areas {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--g-space-xl);
+    margin-bottom: var(--g-space-xl);
+}
+
+.g-footer__brand {
+    text-align: right;
+}
+.g-footer__brand-name {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--g-or-300);
+    margin-bottom: var(--g-space-sm);
+}
+.g-footer__copy {
+    font-size: 0.8rem;
+    color: var(--g-ol-300);
+    margin: 0;
+    max-width: none;
+}
+
+.g-footer__bar {
+    padding-top: var(--g-space-md);
+    border-top: 1px solid var(--g-ol-700);
+    font-size: 0.75rem;
+    color: var(--g-ol-500);
+}
+.g-footer__built a {
+    color: var(--g-ol-300);
+    text-decoration: none;
+}
+.g-footer__built a:hover {
+    color: var(--g-cr-100);
+    text-shadow: 0 0 8px var(--g-glow-primary);
+}
+
+/* Footer links + typography */
+#site-footer a {
+    color: var(--g-ol-300);
+    text-decoration: none;
+}
+#site-footer a:hover {
+    color: var(--g-or-300);
+    text-shadow: 0 0 8px var(--g-glow-cta);
+}
+#site-footer h1, #site-footer h2, #site-footer h3,
+#site-footer h4, #site-footer h5, #site-footer h6 {
+    color: var(--g-cr-100);
+}
+#site-footer p, #site-footer li {
+    color: var(--g-ol-200);
+}
+
+/* ============================================================
+   7. FORMS
+   ============================================================ */
+input, textarea, select, button {
+    font-family: var(--g-font-sans);
+    font-size: 1rem;
+}
+
+label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--g-ol-600);
+    margin-bottom: var(--g-space-xs);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+textarea,
+select {
+    display: block;
+    width: 100%;
+    padding: 10px 14px;
+    background-color: var(--g-cr-100);
+    border: 2px solid var(--g-ol-300);
+    border-radius: 6px;
+    color: var(--g-ol-900);
+    transition: border-color var(--g-transition), box-shadow var(--g-transition);
+    outline: none;
+}
+input:focus, textarea:focus, select:focus {
+    border-color: var(--g-ol-600);
+    box-shadow: 0 0 0 3px var(--g-glow-primary);
+}
+
+button,
+input[type="submit"],
+input[type="button"] {
+    cursor: pointer;
+    padding: 10px 24px;
+    background-color: var(--g-or-500);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    transition: background-color var(--g-transition), box-shadow var(--g-transition);
+}
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover {
+    background-color: var(--g-or-600);
+    box-shadow: 0 0 14px 3px var(--g-glow-cta);
+}
+
+/* ============================================================
+   8. TABLES
+   ============================================================ */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin-bottom: var(--g-space-lg);
+}
+th {
+    background-color: var(--g-ol-800);
+    color: var(--g-ol-200);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+}
+td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--g-cr-300);
+    color: var(--g-ol-800);
+}
+tr:nth-child(even) td { background-color: var(--g-cr-200); }
+tr:hover td { background-color: var(--g-ol-100); }
+
+/* ============================================================
+   9. CONCRETECMS OVERRIDES
+   ============================================================ */
+
+/* Suppress Bootstrap nav-link colors leaking into our header */
+#site-header .nav-link,
+#site-header .navbar-nav .nav-link {
+    color: var(--g-ol-300) !important;
+}
+#site-header .nav-link:hover {
+    color: var(--g-cr-100) !important;
+}
+
+/* ConcreteCMS default accordion — override with MD3 */
+.ccm-block-accordion {
+    border: none !important;
+}
+.ccm-block-accordion .accordion-button {
+    background-color: var(--g-ol-800) !important;
+    color: var(--g-cr-100) !important;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+.ccm-block-accordion .accordion-button:not(.collapsed) {
+    background-color: var(--g-ol-700) !important;
+    color: var(--g-or-300) !important;
+    box-shadow: none !important;
+}
+.ccm-block-accordion .accordion-body {
     background-color: var(--g-cr-100);
     color: var(--g-ol-900);
 }
 
-/* Color Variant — Dark */
-.md3-block--dark {
-    background-color: var(--g-ol-900);
-    color: var(--g-cr-100);
+/* ConcreteCMS page list */
+.ccm-block-page-list-wrapper { margin-bottom: var(--g-space-lg); }
+.ccm-block-page-list-page-entry {
+    border-bottom: 1px solid var(--g-cr-300);
+    padding: var(--g-space-md) 0;
 }
-.md3-block--dark .md3-block__subtitle,
-.md3-block--dark .md3-block__meta {
-    color: var(--g-ol-300);
+.ccm-block-page-list-page-entry-title a {
+    color: var(--g-ol-800);
+    text-decoration: none;
+    font-weight: 700;
+}
+.ccm-block-page-list-page-entry-title a:hover { color: var(--g-or-500); }
+
+/* ConcreteCMS image block */
+.ccm-image-block img { border-radius: 6px; }
+
+/* ConcreteCMS responsive navigation (fallback override) */
+.ccm-responsive-navigation {
+    background: transparent !important;
+    padding: 0 !important;
+}
+.ccm-responsive-navigation ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+}
+.ccm-responsive-navigation li a {
+    display: block;
+    padding: 8px 14px;
+    color: var(--g-ol-300) !important;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color var(--g-transition), color var(--g-transition);
+}
+.ccm-responsive-navigation li a:hover,
+.ccm-responsive-navigation li.nav-selected a {
+    color: var(--g-cr-100) !important;
+    background-color: var(--g-ol-700);
+    text-shadow: 0 0 8px var(--g-glow-primary);
+}
+.ccm-responsive-navigation li.nav-selected a {
+    color: var(--g-or-300) !important;
+    background-color: var(--g-ol-800) !important;
+}
+.ccm-responsive-menu-launch { display: none !important; }
+
+/* ConcreteCMS edit mode */
+.ccm-edit-mode-panel-active #site-header {
+    top: var(--ccm-toolbar-height);
+}
+.ccm-edit-mode-disabled-item {
+    padding: var(--g-space-md);
+    border: 2px dashed var(--g-ol-300);
+    border-radius: 6px;
+    color: var(--g-ol-500);
+    font-size: 0.85rem;
+    text-align: center;
 }
 
-/* Color Variant — Tonal */
-.md3-block--tonal {
-    background-color: var(--g-ol-200);
-    color: var(--g-ol-900);
+/* Pagination */
+.ccm-block-page-list-pagination .pagination {
+    display: flex;
+    gap: 4px;
+    list-style: none;
+    padding: 0;
+    margin: var(--g-space-lg) 0;
 }
-.md3-block--tonal .md3-block__subtitle {
+.ccm-block-page-list-pagination .page-link {
+    padding: 6px 14px;
+    border: 2px solid var(--g-ol-300);
+    border-radius: 4px;
     color: var(--g-ol-700);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: background-color var(--g-transition), box-shadow var(--g-transition);
+}
+.ccm-block-page-list-pagination .page-link:hover,
+.ccm-block-page-list-pagination .page-item.active .page-link {
+    background-color: var(--g-ol-700);
+    color: var(--g-cr-100);
+    box-shadow: 0 0 10px var(--g-glow-primary);
 }
 
-/* Color Variant — Accent */
-.md3-block--accent {
-    background-color: var(--g-or-600);
-    color: #ffffff;
+/* ============================================================
+   10. MD3 BLOCK DESIGN SYSTEM
+   ============================================================ */
+
+/* --- Shared Block Wrapper --- */
+.md3-block {
+    box-sizing: border-box;
+    font-family: var(--g-font-sans);
+    border-radius: 8px;
+    padding: var(--g-space-xl);
+    margin-bottom: var(--g-space-lg);
 }
 
-/* --- Shared Glow Utilities --- */
+/* Color Variants */
+.md3-block--light  { background-color: var(--g-cr-100); color: var(--g-ol-900); }
+.md3-block--dark   { background-color: var(--g-ol-900); color: var(--g-cr-100); }
+.md3-block--tonal  { background-color: var(--g-ol-200); color: var(--g-ol-900); }
+.md3-block--accent { background-color: var(--g-or-600); color: #ffffff; }
+
+.md3-block--dark .md3-block__subtitle,
+.md3-block--dark .md3-block__meta   { color: var(--g-ol-300); }
+.md3-block--tonal .md3-block__subtitle { color: var(--g-ol-700); }
+
+/* --- Glow Utilities --- */
 .md3-glow-cta {
-    transition: box-shadow 0.2s ease, background-color 0.2s ease;
+    transition: box-shadow var(--g-transition), background-color var(--g-transition);
 }
-.md3-glow-cta:hover {
-    box-shadow: 0 0 14px 3px var(--g-glow-cta);
-}
+.md3-glow-cta:hover { box-shadow: 0 0 14px 3px var(--g-glow-cta); }
 
 .md3-glow-primary {
-    transition: box-shadow 0.2s ease;
+    transition: box-shadow var(--g-transition);
 }
-.md3-glow-primary:hover {
-    box-shadow: 0 0 12px 2px var(--g-glow-primary);
-}
+.md3-glow-primary:hover { box-shadow: 0 0 12px 2px var(--g-glow-primary); }
 
 .md3-glow-text {
-    transition: text-shadow 0.2s ease, color 0.2s ease;
+    transition: text-shadow var(--g-transition), color var(--g-transition);
 }
-.md3-glow-text:hover {
-    text-shadow: 0 0 10px var(--g-glow-cta);
-}
+.md3-glow-text:hover { text-shadow: 0 0 10px var(--g-glow-cta); }
 
-/* --- Shared MD3 Button Styles --- */
+/* --- MD3 Buttons --- */
 .md3-btn {
     display: inline-block;
     padding: 10px 24px;
     border-radius: 20px;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
     text-decoration: none;
     cursor: pointer;
     border: none;
-    transition: box-shadow 0.2s ease, background-color 0.2s ease;
+    transition: box-shadow var(--g-transition), background-color var(--g-transition);
 }
-
-.md3-btn--filled {
-    background-color: var(--g-or-500);
-    color: #ffffff;
-}
+.md3-btn--filled  { background-color: var(--g-or-500); color: #ffffff; }
 .md3-btn--filled:hover {
     background-color: var(--g-or-600);
     box-shadow: 0 0 14px 3px var(--g-glow-cta);
     color: #ffffff;
     text-decoration: none;
 }
-
 .md3-btn--outlined {
     background-color: transparent;
     color: var(--g-ol-700);
     border: 2px solid var(--g-ol-500);
 }
-.md3-btn--outlined:hover {
-    box-shadow: 0 0 12px 2px var(--g-glow-primary);
-}
+.md3-btn--outlined:hover { box-shadow: 0 0 12px 2px var(--g-glow-primary); color: var(--g-ol-900); }
+.md3-btn--tonal   { background-color: var(--g-ol-200); color: var(--g-ol-900); }
+.md3-btn--tonal:hover { box-shadow: 0 0 12px 2px var(--g-glow-primary); }
 
-.md3-btn--tonal {
-    background-color: var(--g-ol-200);
-    color: var(--g-ol-900);
-}
-.md3-btn--tonal:hover {
-    box-shadow: 0 0 12px 2px var(--g-glow-primary);
-}
+.md3-block--dark .md3-btn--outlined { color: var(--g-ol-300); border-color: var(--g-ol-500); }
+.md3-block--accent .md3-btn--outlined { color: #fff; border-color: rgba(255,255,255,0.6); }
 
-/* Dark variant button overrides */
-.md3-block--dark .md3-btn--outlined {
-    color: var(--g-ol-300);
-    border-color: var(--g-ol-500);
-}
-
-/* --- Section Label (military uppercase) --- */
+/* --- Section Label --- */
 .md3-section-label {
     display: block;
-    font-size: 11px;
-    letter-spacing: 3px;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     font-weight: 700;
     color: var(--g-ol-500);
-    margin-bottom: 8px;
+    margin-bottom: var(--g-space-sm);
 }
-.md3-block--dark .md3-section-label {
-    color: var(--g-ol-300);
+.md3-block--dark .md3-section-label   { color: var(--g-ol-300); }
+.md3-block--accent .md3-section-label { color: rgba(255,255,255,0.75); }
+
+/* ============================================================
+   11. RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+    #main-content {
+        padding: var(--g-space-lg) var(--g-space-md);
+    }
+    .g-header__inner {
+        padding: 0 var(--g-space-md);
+    }
+    .g-footer__areas {
+        grid-template-columns: 1fr;
+    }
+    .g-footer__brand { text-align: left; }
+    .md3-block { padding: var(--g-space-lg); }
 }
-.md3-block--accent .md3-section-label {
-    color: rgba(255, 255, 255, 0.75);
+
+@media (max-width: 480px) {
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.3rem; }
 }

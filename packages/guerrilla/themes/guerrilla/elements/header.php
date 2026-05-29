@@ -1,32 +1,21 @@
 <?php
 /** @var \Concrete\Core\Page\Page $c */
 /** @var \Concrete\Core\View\View $view */
+defined('C5_EXECUTE') or die('Access Denied.');
 
-$site = \Concrete\Core\Support\Facade\Site::getSite();
+$site     = \Concrete\Core\Support\Facade\Site::getSite();
 $siteName = $site ? $site->getSiteName() : '';
 ?>
-<header id="site-header" class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="<?php echo BASE_URL; ?>">
-            <?php echo $siteName; ?>
+<header id="site-header" role="banner">
+    <div class="g-header__inner">
+        <a href="<?php echo BASE_URL; ?>" class="g-header__brand" aria-label="<?php echo t('Home'); ?>">
+            <span class="g-header__brand-text"><?php echo htmlspecialchars($siteName); ?></span>
         </a>
-
-        <button class="navbar-toggler" type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarMain"
-                aria-controls="navbarMain"
-                aria-expanded="false"
-                aria-label="<?php echo t('Toggle navigation'); ?>">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarMain">
-            <nav class="navbar-nav ms-auto" aria-label="<?php echo t('Main navigation'); ?>">
-                <?php
-                $navBlock = new GlobalArea('Main Nav');
-                $navBlock->display($c);
-                ?>
-            </nav>
+        <div class="g-header__nav" role="navigation" aria-label="<?php echo t('Main navigation'); ?>">
+            <?php
+            $navBlock = new GlobalArea('Main Nav');
+            $navBlock->display($c);
+            ?>
         </div>
     </div>
 </header>

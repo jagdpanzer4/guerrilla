@@ -17,11 +17,14 @@ class PageTheme extends Theme
 
     public function registerAssets(): void
     {
-        // Register Bootstrap 5
+        // Bootstrap 5 (grid, utilities)
         $this->requireAsset('javascript', 'bootstrap');
         $this->requireAsset('css', 'bootstrap');
 
-        // Load Material Web Components (MD3) bundle
+        // Font Awesome 5 (icons for feature, content blocks)
+        $this->requireAsset('css', 'font-awesome');
+
+        // Material Web Components (MD3) bundle
         $this->requireAsset('javascript', 'guerrilla/material-web');
     }
 
