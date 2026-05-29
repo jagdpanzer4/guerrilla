@@ -682,3 +682,175 @@ tr:hover td { background-color: var(--g-ol-100); }
     h1 { font-size: 1.6rem; }
     h2 { font-size: 1.3rem; }
 }
+
+/* ============================================================
+   12. CCMS UI ISOLATION
+   Reset our theme styles inside ConcreteCMS admin UI elements
+   (panel, toolbar, dialogs) so they don't interfere.
+   ============================================================ */
+
+/* Targets: edit-mode panel, toolbar, jQuery dialogs, dashboard */
+#ccm-panel-content,
+#ccm-nav,
+#ccm-toolbar,
+.ccm-toolbar,
+.ccm-panel-menu,
+.ccm-panel-inner,
+.ccm-panel-body,
+.ccm-panel,
+.ui-dialog,
+.ui-widget,
+.ccm-ui,
+.ccm-dashboard-page-controls,
+.ccm-notification-help-launcher,
+.ccm-add-block-area-handle,
+.ccm-block-edit-overlay,
+.ccm-block-controls,
+.ccm-area-controls,
+.ccm-area-menu-overlay {
+    font-family: inherit;
+    color: inherit;
+}
+
+/* Reset our aggressive button styles inside CCMS UI */
+#ccm-panel-content button,
+#ccm-toolbar button,
+.ccm-toolbar button,
+.ccm-ui button,
+.ui-dialog button,
+.ccm-panel button,
+.ccm-panel-menu button,
+#ccm-nav button {
+    background-color: revert;
+    color: revert;
+    border: revert;
+    border-radius: revert;
+    padding: revert;
+    font-weight: revert;
+    letter-spacing: revert;
+    box-shadow: revert;
+    transition: none;
+}
+#ccm-panel-content button:hover,
+#ccm-toolbar button:hover,
+.ccm-toolbar button:hover,
+.ccm-ui button:hover,
+.ui-dialog button:hover,
+.ccm-panel button:hover {
+    background-color: revert;
+    box-shadow: revert;
+}
+
+/* Reset label styles inside CCMS UI */
+#ccm-panel-content label,
+#ccm-toolbar label,
+.ccm-ui label,
+.ui-dialog label,
+.ccm-panel label {
+    display: revert;
+    font-size: revert;
+    font-weight: revert;
+    letter-spacing: revert;
+    text-transform: revert;
+    color: revert;
+    margin-bottom: revert;
+}
+
+/* Reset input/select/textarea inside CCMS UI */
+#ccm-panel-content input,
+#ccm-panel-content select,
+#ccm-panel-content textarea,
+#ccm-toolbar input,
+#ccm-toolbar select,
+.ccm-ui input,
+.ccm-ui select,
+.ccm-ui textarea,
+.ui-dialog input,
+.ui-dialog select,
+.ui-dialog textarea,
+.ccm-panel input,
+.ccm-panel select,
+.ccm-panel textarea {
+    display: revert;
+    width: revert;
+    padding: revert;
+    background-color: revert;
+    border: revert;
+    border-radius: revert;
+    color: revert;
+    box-shadow: revert;
+    transition: none;
+    outline: revert;
+}
+
+/* Reset img/svg inside CCMS UI (our display:block breaks icons) */
+#ccm-panel-content img,
+#ccm-panel-content svg,
+#ccm-toolbar img,
+#ccm-toolbar svg,
+.ccm-toolbar img,
+.ccm-toolbar svg,
+.ccm-ui img,
+.ccm-ui svg,
+.ui-dialog img,
+.ui-dialog svg,
+.ccm-panel img,
+.ccm-panel svg,
+.ccm-block-edit-overlay img,
+.ccm-block-edit-overlay svg,
+.ccm-area-controls img,
+.ccm-area-controls svg {
+    display: revert;
+    max-width: revert;
+    height: revert;
+}
+
+/* Reset table styles inside CCMS UI */
+#ccm-panel-content table,
+#ccm-panel-content th,
+#ccm-panel-content td,
+.ccm-ui table,
+.ccm-ui th,
+.ccm-ui td,
+.ui-dialog table,
+.ui-dialog th,
+.ui-dialog td {
+    background-color: revert;
+    color: revert;
+    font-size: revert;
+    letter-spacing: revert;
+    text-transform: revert;
+    padding: revert;
+    border: revert;
+}
+
+/* Reset link/heading colours inside CCMS UI */
+#ccm-panel-content a,
+.ccm-ui a,
+.ui-dialog a,
+.ccm-panel a {
+    color: revert;
+    text-decoration: revert;
+    text-shadow: none;
+}
+#ccm-panel-content h1, #ccm-panel-content h2,
+#ccm-panel-content h3, #ccm-panel-content h4,
+#ccm-panel-content h5, #ccm-panel-content h6,
+.ccm-ui h1, .ccm-ui h2, .ccm-ui h3,
+.ccm-ui h4, .ccm-ui h5, .ccm-ui h6,
+.ui-dialog h1, .ui-dialog h2, .ui-dialog h3 {
+    color: revert;
+    font-size: revert;
+    font-weight: revert;
+    letter-spacing: revert;
+    margin: revert;
+}
+
+/* Ensure CCMS panel z-index is never clipped by our header */
+#ccm-panel-content,
+#ccm-toolbar,
+.ccm-toolbar,
+.ui-dialog,
+.ccm-panel {
+    z-index: 9999 !important;
+}

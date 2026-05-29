@@ -31,7 +31,7 @@ class Controller extends Package
         $al->register(
             'javascript',
             'guerrilla/material-web',
-            'js/dist/material-web.js',
+            'themes/guerrilla/js/dist/material-web.js',
             [
                 'position' => Asset::ASSET_POSITION_FOOTER,
                 'local'    => true,
