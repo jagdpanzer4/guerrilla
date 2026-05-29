@@ -185,7 +185,7 @@ hr {
 #site-header {
     position: sticky;
     top: 0;
-    z-index: 900;
+    z-index: 200;
     background-color: var(--g-ol-900);
     border-bottom: 2px solid var(--g-ol-700);
     box-shadow: 0 2px 12px rgba(0,0,0,0.35);
@@ -846,11 +846,13 @@ tr:hover td { background-color: var(--g-ol-100); }
     margin: revert;
 }
 
-/* Ensure CCMS panel z-index is never clipped by our header */
-#ccm-panel-content,
-#ccm-toolbar,
-.ccm-toolbar,
-.ui-dialog,
-.ccm-panel {
-    z-index: 9999 !important;
-}
+/*
+ * NOTE: Do NOT override z-index on CCMS toolbar/panel here.
+ * CCMS manages its own z-index stack:
+ *   .ccm-toolbar         z-index: 1000  (fixed top)
+ *   .ccm-panel           z-index: 900   (fixed side)
+ *   .ccm-panel-detail    z-index: 870
+ *   .ccm-panel-overlay   z-index: 850
+ * Our #site-header is z-index: 200 — well below all of them.
+ * Overriding with !important breaks Popper.js dropdown positioning.
+ */

@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="<?php echo $view->getThemePath(); ?>/css/main.css">
 </head>
 <body class="ccm-page-id-<?php echo $c->getCollectionID(); ?>">
+<div class="ccm-page">
 
     <?php $view->inc('elements/header.php'); ?>
 
@@ -27,6 +28,8 @@
     </main>
 
     <?php $view->inc('elements/footer.php'); ?>
+
+</div><!-- /.ccm-page -->
 
     <?php View::element('footer_required'); ?>
     <script src="<?php echo $view->getThemePath(); ?>/js/main.js"></script>
