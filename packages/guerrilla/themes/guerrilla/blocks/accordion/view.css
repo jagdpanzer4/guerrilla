@@ -238,7 +238,7 @@
    =============================================== */
 
 .md3-accordion--tactical .md3-accordion__trigger {
-    font-family: 'Courier New', monospace;
+    font-family: var(--g-font-sans);
     letter-spacing: 2px;
     text-transform: uppercase;
     font-size: 12px;
@@ -263,7 +263,7 @@
     background-color: var(--g-cr-100);
     color: var(--g-ol-900);
     border-left: 4px solid var(--g-ol-500);
-    font-family: 'Courier New', monospace;
+    font-family: var(--g-font-sans);
     font-size: 13px;
 }
 .md3-accordion--tactical.md3-block--light .md3-accordion__item {
@@ -288,7 +288,7 @@
     background-color: #0a0e06;
     color: var(--g-ol-300);
     border-left: 4px solid var(--g-ol-600);
-    font-family: 'Courier New', monospace;
+    font-family: var(--g-font-sans);
     font-size: 13px;
 }
 .md3-accordion--tactical.md3-block--dark .md3-accordion__item {
@@ -312,7 +312,7 @@
     background-color: var(--g-ol-200);
     color: var(--g-ol-900);
     border-left: 4px solid var(--g-or-500);
-    font-family: 'Courier New', monospace;
+    font-family: var(--g-font-sans);
     font-size: 13px;
 }
 .md3-accordion--tactical.md3-block--tonal .md3-accordion__item {

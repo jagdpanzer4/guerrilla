@@ -36,12 +36,12 @@ if (($buttonSize ?? '') === 'sm') $btnClass .= ' md3-btn--sm';
             <?php if ((string)($body ?? '') !== ''): ?>
             <div class="g-hero__body"><?= $body ?></div>
             <?php endif; ?>
-            <?php if (isset($button) && $button->getValue()): ?>
+            <?php if (!empty($linkURL) || !empty($buttonText)): ?>
             <div class="g-hero__cta">
-                <a href="<?= h($button->getHref()) ?>"
+                <a href="<?= h($linkURL ?? '#') ?>"
                    class="<?= $btnClass ?> md3-glow-cta">
                    <?php if ($iconTag): ?><span class="g-hero__btn-icon"><?= $iconTag ?></span><?php endif; ?>
-                   <?= h($button->getValue()) ?>
+                   <?= h($buttonText ?? '') ?>
                 </a>
             </div>
             <?php endif; ?>

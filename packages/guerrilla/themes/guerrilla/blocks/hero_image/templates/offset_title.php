@@ -33,11 +33,11 @@ if (($buttonStyle ?? '') === 'outline') {
         <?php if ((string)($body ?? '') !== ''): ?>
         <div class="g-hero__body"><?= $body ?></div>
         <?php endif; ?>
-        <?php if (isset($button) && $button->getValue()): ?>
+        <?php if (!empty($linkURL) || !empty($buttonText)): ?>
         <div class="g-hero__cta">
-            <a href="<?= h($button->getHref()) ?>" class="<?= $btnClass ?>">
+            <a href="<?= h($linkURL ?? '#') ?>" class="<?= $btnClass ?>">
                <?php if ($iconTag): ?><span class="g-hero__btn-icon"><?= $iconTag ?></span><?php endif; ?>
-               <?= h($button->getValue()) ?>
+               <?= h($buttonText ?? '') ?>
             </a>
         </div>
         <?php endif; ?>
