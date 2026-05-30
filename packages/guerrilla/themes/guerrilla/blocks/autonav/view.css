@@ -1,5 +1,5 @@
 /* ============================================
-   MD3 Auto Nav — Base
+   MD3 Auto Nav — Base (default & cream-topbar variants)
    ============================================ */
 .md3-nav {
     position: relative;
@@ -11,7 +11,6 @@
     justify-content: flex-end;
     padding: 0 24px;
     min-height: 56px;
-    border-radius: 0;
 }
 
 .md3-nav__list {
@@ -28,14 +27,62 @@
 }
 
 .md3-nav__link {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 4px;
     padding: 10px 16px;
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.5px;
     text-decoration: none;
     border-radius: 4px;
-    transition: background-color 0.2s, color 0.2s, text-shadow 0.2s;
+    white-space: nowrap;
+    transition: background-color 0.18s, color 0.18s;
+}
+
+/* ---- Sub-arrow chevron ---- */
+.md3-nav__sub-arrow {
+    flex-shrink: 0;
+    opacity: 0.7;
+    transition: transform 0.18s;
+}
+.md3-nav__item--has-sub:hover > .md3-nav__link .md3-nav__sub-arrow {
+    transform: rotate(180deg);
+}
+
+/* ---- Dropdown (topbar variants) ---- */
+.md3-nav__dropdown {
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    min-width: 190px;
+    list-style: none;
+    margin: 0;
+    padding: 6px 0;
+    border-radius: 6px;
+    /* Animate with visibility+opacity so :hover transition works without JS */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.15s, visibility 0.15s, transform 0.15s;
+    z-index: 200;
+}
+
+.md3-nav__item--has-sub:hover > .md3-nav__dropdown,
+.md3-nav__item--sub-open > .md3-nav__dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.md3-nav__dropdown-link {
+    display: block;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.15s, color 0.15s;
 }
 
 /* ---- LAYOUT A: Dark Topbar ---- */
@@ -46,20 +93,21 @@
 .md3-nav--dark-topbar .md3-nav__link {
     color: var(--g-ol-300);
 }
-.md3-nav--dark-topbar .md3-nav__link:hover {
+.md3-nav--dark-topbar .md3-nav__link:hover,
+.md3-nav--dark-topbar .md3-nav__item--has-sub:hover > .md3-nav__link {
     color: var(--g-cr-100);
     background-color: var(--g-ol-700);
-    text-shadow: 0 0 8px var(--g-glow-primary);
 }
-.md3-nav--dark-topbar .md3-nav__item--current > .md3-nav__link {
+.md3-nav--dark-topbar .md3-nav__item--current > .md3-nav__link,
+.md3-nav--dark-topbar .md3-nav__item--in-path > .md3-nav__link {
     color: var(--g-or-300);
     background-color: var(--g-ol-800);
 }
 
-/* Dark topbar dropdown */
 .md3-nav--dark-topbar .md3-nav__dropdown {
     background-color: var(--g-ol-800);
     border: 1px solid var(--g-ol-600);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
 }
 .md3-nav--dark-topbar .md3-nav__dropdown-link {
     color: var(--g-ol-300);
@@ -67,7 +115,9 @@
 .md3-nav--dark-topbar .md3-nav__dropdown-link:hover {
     color: var(--g-cr-100);
     background-color: var(--g-ol-700);
-    text-shadow: 0 0 6px var(--g-glow-primary);
+}
+.md3-nav--dark-topbar .md3-nav__dropdown-item.md3-nav__item--current > .md3-nav__dropdown-link {
+    color: var(--g-or-300);
 }
 
 /* ---- LAYOUT B: Cream Topbar ---- */
@@ -79,21 +129,23 @@
 .md3-nav--cream-topbar .md3-nav__link {
     color: var(--g-ol-800);
 }
-.md3-nav--cream-topbar .md3-nav__link:hover {
+.md3-nav--cream-topbar .md3-nav__link:hover,
+.md3-nav--cream-topbar .md3-nav__item--has-sub:hover > .md3-nav__link {
     color: var(--g-ol-900);
     background-color: var(--g-ol-200);
-    text-shadow: 0 0 8px var(--g-glow-primary);
 }
 .md3-nav--cream-topbar .md3-nav__item--current > .md3-nav__link {
     color: var(--g-or-600);
     border-bottom: 2px solid var(--g-or-500);
 }
+.md3-nav--cream-topbar .md3-nav__item--in-path > .md3-nav__link {
+    color: var(--g-ol-900);
+}
 
-/* Cream topbar dropdown */
 .md3-nav--cream-topbar .md3-nav__dropdown {
     background-color: var(--g-cr-100);
     border: 1px solid var(--g-ol-300);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
 }
 .md3-nav--cream-topbar .md3-nav__dropdown-link {
     color: var(--g-ol-800);
@@ -101,10 +153,12 @@
 .md3-nav--cream-topbar .md3-nav__dropdown-link:hover {
     color: var(--g-ol-900);
     background-color: var(--g-ol-200);
-    text-shadow: 0 0 6px var(--g-glow-primary);
+}
+.md3-nav--cream-topbar .md3-nav__dropdown-item.md3-nav__item--current > .md3-nav__dropdown-link {
+    color: var(--g-or-600);
 }
 
-/* ---- LAYOUT D: Sidebar ---- */
+/* ---- LAYOUT C: Sidebar ---- */
 .md3-nav--sidebar {
     background-color: var(--g-ol-900);
     border-radius: 8px;
@@ -130,15 +184,14 @@
     color: var(--g-cr-100);
     background-color: var(--g-ol-800);
     border-left-color: var(--g-or-500);
-    text-shadow: 0 0 8px var(--g-glow-primary);
 }
-.md3-nav--sidebar .md3-nav__item--current > .md3-nav__link {
+.md3-nav--sidebar .md3-nav__item--current > .md3-nav__link,
+.md3-nav--sidebar .md3-nav__item--in-path > .md3-nav__link {
     color: var(--g-or-300);
     background-color: var(--g-ol-800);
     border-left-color: var(--g-or-500);
 }
 
-/* Sidebar sub-nav */
 .md3-nav__sub {
     list-style: none;
     margin: 0;
@@ -152,46 +205,19 @@
     color: var(--g-ol-300);
     text-decoration: none;
     border-left: 3px solid transparent;
-    transition: background-color 0.2s, color 0.2s, text-shadow 0.2s;
+    transition: background-color 0.18s, color 0.18s;
 }
 .md3-nav__sub-link:hover {
     color: var(--g-cr-100);
     background-color: var(--g-ol-700);
     border-left-color: var(--g-or-400);
-    text-shadow: 0 0 6px var(--g-glow-primary);
 }
-.md3-nav__item--current .md3-nav__sub-link {
+.md3-nav__sub-item.md3-nav__item--current > .md3-nav__sub-link {
     color: var(--g-or-300);
+    border-left-color: var(--g-or-500);
 }
 
-/* ---- Dropdown (topbar layouts) ---- */
-.md3-nav__dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    min-width: 180px;
-    list-style: none;
-    margin: 0;
-    padding: 4px 0;
-    border-radius: 6px;
-    display: none;
-    z-index: 100;
-}
-
-.md3-nav__item:hover > .md3-nav__dropdown,
-.md3-nav__item--sub-open > .md3-nav__dropdown {
-    display: block;
-}
-
-.md3-nav__dropdown-link {
-    display: block;
-    padding: 10px 16px;
-    font-size: 14px;
-    text-decoration: none;
-    transition: background-color 0.2s, color 0.2s, text-shadow 0.2s;
-}
-
-/* ---- Hamburger toggle (mobile) ---- */
+/* ---- Hamburger toggle ---- */
 .md3-nav__toggle {
     display: none;
     flex-direction: column;
@@ -214,12 +240,10 @@
     background-color: var(--g-ol-800);
 }
 
-/* ---- Sub-nav arrow ---- */
-.md3-nav__sub-arrow {
-    font-size: 10px;
-    margin-left: 4px;
-    opacity: 0.7;
-}
+/* Hamburger → X when open */
+.md3-autonav--open .md3-nav__hamburger:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.md3-autonav--open .md3-nav__hamburger:nth-child(2) { opacity: 0; }
+.md3-autonav--open .md3-nav__hamburger:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ---- Mobile ---- */
 @media (max-width: 767px) {
@@ -236,17 +260,36 @@
     .md3-nav.md3-autonav--open .md3-nav__list {
         display: flex;
     }
-    .md3-nav__dropdown {
-        position: static;
-        display: none;
-        box-shadow: none;
-        border-radius: 0;
-        padding-left: 16px;
-    }
-    .md3-nav__item--sub-open > .md3-nav__dropdown {
-        display: block;
-    }
     .md3-nav__link {
         border-radius: 0;
+        padding: 12px 20px;
+    }
+    /* Dropdown on mobile: static position, expand with max-height */
+    .md3-nav__dropdown {
+        position: static;
+        opacity: 1;
+        visibility: hidden;
+        max-height: 0;
+        overflow: hidden;
+        transform: none;
+        transition: max-height 0.25s ease, visibility 0.25s;
+        box-shadow: none;
+        border-radius: 0;
+        border: none;
+        border-left: 3px solid var(--g-or-500);
+        padding: 0;
+    }
+    .md3-nav__item--sub-open > .md3-nav__dropdown {
+        visibility: visible;
+        max-height: 400px;
+    }
+    .md3-nav__dropdown-link {
+        padding: 10px 20px 10px 32px;
+    }
+    .md3-nav__sub-arrow {
+        margin-left: auto;
+    }
+    .md3-nav__item--sub-open > .md3-nav__link .md3-nav__sub-arrow {
+        transform: rotate(180deg);
     }
 }

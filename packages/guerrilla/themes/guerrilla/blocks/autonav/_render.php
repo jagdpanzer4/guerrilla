@@ -1,33 +1,46 @@
 <?php defined('C5_EXECUTE') or die('Access Denied.');
 /**
  * MD3 Auto Nav Block — render engine
- * @var array  $navObjects  Array of NavObject from ConcreteCMS
+ * @var array  $navObjects  NavItem objects from ConcreteCMS (DFS order: parent then its children)
  * @var string $layout      dark-topbar | cream-topbar | sidebar
  */
 $layout = $layout ?? 'dark-topbar';
+
+// Build parent→children map using DFS order.
+// CCMS returns items depth-first: a level-1 item is immediately followed by its level-2 children.
+$topItems    = [];
+$childrenMap = [];
+foreach ($navObjects as $item) {
+    if ((int) $item->level === 1) {
+        $topItems[]                        = $item;
+        $childrenMap[count($topItems) - 1] = [];
+    } elseif ((int) $item->level === 2 && count($topItems) > 0) {
+        $childrenMap[count($topItems) - 1][] = $item;
+    }
+}
 ?>
-<nav class="md3-nav md3-nav--<?= htmlspecialchars($layout) ?>" aria-label="<?= t('Main Navigation') ?>">
+<nav class="md3-nav md3-nav--<?= $layout ?>" aria-label="<?= t('Main Navigation') ?>">
 
     <?php if ($layout === 'sidebar'): ?>
 
         <ul class="md3-nav__list md3-nav__list--sidebar">
-            <?php foreach ($navObjects as $item): ?>
-                <?php if ($item->level > 1) continue; ?>
-                <li class="md3-nav__item<?= $item->isCurrent ? ' md3-nav__item--current' : '' ?><?= $item->isSelected ? ' md3-nav__item--selected' : '' ?>">
-                    <a href="<?= htmlspecialchars($item->url) ?>"
+            <?php foreach ($topItems as $idx => $item):
+                $children = $childrenMap[$idx];
+            ?>
+                <li class="md3-nav__item<?= $item->isCurrent ? ' md3-nav__item--current' : '' ?><?= $item->inPath ? ' md3-nav__item--in-path' : '' ?>">
+                    <a href="<?= $item->url ?>"
                        class="md3-nav__link md3-glow-text"
-                       <?= $item->target ? 'target="' . htmlspecialchars($item->target) . '"' . ($item->target === '_blank' ? ' rel="noopener"' : '') : '' ?>>
-                        <?= htmlspecialchars($item->name) ?>
+                       <?= $item->target ? 'target="' . $item->target . '"' . ($item->target === '_blank' ? ' rel="noopener"' : '') : '' ?>>
+                        <?= $item->name ?>
                     </a>
-                    <?php if ($item->hasSubmenu): ?>
+                    <?php if (!empty($children)): ?>
                     <ul class="md3-nav__sub">
-                        <?php foreach ($navObjects as $sub): ?>
-                            <?php if ($sub->level !== 2) continue; ?>
+                        <?php foreach ($children as $sub): ?>
                             <li class="md3-nav__sub-item<?= $sub->isCurrent ? ' md3-nav__item--current' : '' ?>">
-                                <a href="<?= htmlspecialchars($sub->url) ?>"
+                                <a href="<?= $sub->url ?>"
                                    class="md3-nav__sub-link md3-glow-text"
-                                   <?= $sub->target ? 'target="' . htmlspecialchars($sub->target) . '"' . ($sub->target === '_blank' ? ' rel="noopener"' : '') : '' ?>>
-                                    <?= htmlspecialchars($sub->name) ?>
+                                   <?= $sub->target ? 'target="' . $sub->target . '"' . ($sub->target === '_blank' ? ' rel="noopener"' : '') : '' ?>>
+                                    <?= $sub->name ?>
                                 </a>
                             </li>
                         <?php endforeach; ?>
@@ -48,25 +61,29 @@ $layout = $layout ?? 'dark-topbar';
                 <span class="md3-nav__hamburger"></span>
                 <span class="md3-nav__hamburger"></span>
             </button>
+
             <ul class="md3-nav__list" role="list">
-                <?php foreach ($navObjects as $item): ?>
-                    <?php if ($item->level > 1) continue; ?>
-                    <li class="md3-nav__item<?= $item->isCurrent ? ' md3-nav__item--current' : '' ?><?= $item->hasSubmenu ? ' md3-nav__item--has-sub' : '' ?>">
-                        <a href="<?= htmlspecialchars($item->url) ?>"
+                <?php foreach ($topItems as $idx => $item):
+                    $children    = $childrenMap[$idx];
+                    $hasChildren = !empty($children);
+                ?>
+                    <li class="md3-nav__item<?= $item->isCurrent ? ' md3-nav__item--current' : '' ?><?= $item->inPath ? ' md3-nav__item--in-path' : '' ?><?= $hasChildren ? ' md3-nav__item--has-sub' : '' ?>">
+                        <a href="<?= $item->url ?>"
                            class="md3-nav__link md3-glow-text"
-                           <?= $item->target ? 'target="' . htmlspecialchars($item->target) . '"' . ($item->target === '_blank' ? ' rel="noopener"' : '') : '' ?>>
-                            <?= htmlspecialchars($item->name) ?>
-                            <?php if ($item->hasSubmenu): ?><span class="md3-nav__sub-arrow" aria-hidden="true">&#9660;</span><?php endif; ?>
+                           <?= $item->target ? 'target="' . $item->target . '"' . ($item->target === '_blank' ? ' rel="noopener"' : '') : '' ?>>
+                            <?= $item->name ?>
+                            <?php if ($hasChildren): ?>
+                                <svg class="md3-nav__sub-arrow" aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            <?php endif; ?>
                         </a>
-                        <?php if ($item->hasSubmenu): ?>
-                        <ul class="md3-nav__dropdown">
-                            <?php foreach ($navObjects as $sub): ?>
-                                <?php if ($sub->level !== 2) continue; ?>
+                        <?php if ($hasChildren): ?>
+                        <ul class="md3-nav__dropdown" role="list">
+                            <?php foreach ($children as $sub): ?>
                                 <li class="md3-nav__dropdown-item<?= $sub->isCurrent ? ' md3-nav__item--current' : '' ?>">
-                                    <a href="<?= htmlspecialchars($sub->url) ?>"
+                                    <a href="<?= $sub->url ?>"
                                        class="md3-nav__dropdown-link md3-glow-text"
-                                       <?= $sub->target ? 'target="' . htmlspecialchars($sub->target) . '"' . ($sub->target === '_blank' ? ' rel="noopener"' : '') : '' ?>>
-                                        <?= htmlspecialchars($sub->name) ?>
+                                       <?= $sub->target ? 'target="' . $sub->target . '"' . ($sub->target === '_blank' ? ' rel="noopener"' : '') : '' ?>>
+                                        <?= $sub->name ?>
                                     </a>
                                 </li>
                             <?php endforeach; ?>
@@ -81,31 +98,37 @@ $layout = $layout ?? 'dark-topbar';
 </nav>
 
 <script>
-(function() {
-    if (window.md3NavLoaded) return;
-    window.md3NavLoaded = true;
+(function () {
+    'use strict';
+    if (window._md3NavReady) return;
+    window._md3NavReady = true;
 
-    // Hamburger toggle (mobile)
-    document.addEventListener('click', function(e) {
-        var toggle = e.target.closest('[data-md3-nav-toggle]');
-        if (!toggle) return;
-        if (window.innerWidth >= 768) return;
-        e.preventDefault();
-        var nav = toggle.closest('.md3-nav');
-        var expanded = toggle.getAttribute('aria-expanded') === 'true';
-        toggle.setAttribute('aria-expanded', String(!expanded));
-        nav.classList.toggle('md3-autonav--open', !expanded);
+    // Hamburger: toggle mobile menu
+    document.addEventListener('click', function (e) {
+        var btn = e.target.closest('[data-md3-nav-toggle]');
+        if (!btn) return;
+        var nav = btn.closest('.md3-nav');
+        var open = nav.classList.toggle('md3-autonav--open');
+        btn.setAttribute('aria-expanded', String(open));
     });
 
-    // Desktop dropdown on hover — handled via CSS :hover
-    // Mobile dropdown on click
-    document.addEventListener('click', function(e) {
+    // Sub-menu: click on parent link on touch/mobile
+    document.addEventListener('click', function (e) {
         var link = e.target.closest('.md3-nav__item--has-sub > .md3-nav__link');
         if (!link) return;
-        if (window.innerWidth >= 768) return;
+        if (window.matchMedia('(hover: hover)').matches) return; // desktop: CSS :hover handles it
         e.preventDefault();
-        var item = link.closest('.md3-nav__item--has-sub');
-        item.classList.toggle('md3-nav__item--sub-open');
+        link.closest('.md3-nav__item--has-sub').classList.toggle('md3-nav__item--sub-open');
     });
-})();
+
+    // Close open menus when clicking outside
+    document.addEventListener('click', function (e) {
+        if (e.target.closest('.md3-nav')) return;
+        document.querySelectorAll('.md3-nav.md3-autonav--open').forEach(function (nav) {
+            nav.classList.remove('md3-autonav--open');
+            var btn = nav.querySelector('[data-md3-nav-toggle]');
+            if (btn) btn.setAttribute('aria-expanded', 'false');
+        });
+    });
+}());
 </script>
